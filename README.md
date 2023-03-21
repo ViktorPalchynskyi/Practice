@@ -1,5 +1,5 @@
 # Practice
-Practice code and exercises.
+Practice code and exercises
 
 commit format: 
 
