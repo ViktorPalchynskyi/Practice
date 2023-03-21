@@ -20,4 +20,4 @@ function loadScript(src, callback) {
 
 const promisifyLoadScript = promisify(loadScript);
 promisifyLoadScript('./testFile.js')
-   .then(res => console.log('res', res.src))
+   .then(res => console.log('res', res.src));
