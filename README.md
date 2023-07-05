@@ -3,5 +3,5 @@ Practice code and exercises
 
 commit format: 
 
-1. {data} {dir} practice: {practice_name}
-2. {data} {dir} exercise: {exercise_name}
+1. {date} {dir} practice: {practice_name}
+2. {date} {dir} exercise: {exercise_name}
