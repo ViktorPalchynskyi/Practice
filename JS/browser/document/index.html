@@ -1,32 +1,82 @@
 <!DOCTYPE html>
-  <html lang="en">
+<html lang="en">
   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>
-      <style>
-          table {
-            border-collapse: collapse;
-          }
-      
-          td {
-            border: 1px solid black;
-            padding: 3px 5px;
-          }
-        </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .alert {
+        padding: 15px;
+        border: 1px solid #d6e9c6;
+        border-radius: 4px;
+        color: #3c763d;
+        background-color: #dff0d8;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid;
+      }
+
+      table {
+  border-collapse: collapse;
+}
+    </style>
   </head>
   <body>
-
-    <div data-widget-name="menu">Choose the genre</div>
-    <a name="list">the list</a>
+    <h1>Hello there</h1>
+    <ol id="elem">
+      <li>Привет</li>
+      <li>Мир</li>
+    </ol>
+    <div id="container"></div>
     <ul>
-      <li><a href="http://google.com">http://google.com</a></li>
-      <li><a href="/tutorial">/tutorial.html</a></li>
-      <li><a href="local/path">local/path</a></li>
-      <li><a href="ftp://ftp.com/my.zip">ftp://ftp.com/my.zip</a></li>
-      <li><a href="http://nodejs.org">http://nodejs.org</a></li>
-      <li><a href="http://internal.com/test">http://internal.com/test</a></li>
+      <li>
+        Животные
+        <ul>
+          <li>
+            Млекопитающие
+            <ul>
+              <li>Коровы</li>
+              <li>Ослы</li>
+              <li>Собаки</li>
+              <li>Тигры</li>
+            </ul>
+          </li>
+          <li>
+            Другие
+            <ul>
+              <li>Змеи</li>
+              <li>Птицы</li>
+              <li>Ящерицы</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Рыбы
+        <ul>
+          <li>
+            Аквариумные
+            <ul>
+              <li>Гуппи</li>
+              <li>Скалярии</li>
+            </ul>
+          </li>
+          <li>
+            Морские
+            <ul>
+              <li>Морская форель</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
     </ul>
   </body>
-  <script src="dom_attributes_and_properties.js"></script>
+  <div id="table">
+
+  </div>
+  <script src="table.js"></script>
 </html>
+
