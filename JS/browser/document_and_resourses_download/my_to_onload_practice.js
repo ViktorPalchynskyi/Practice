@@ -1,0 +1,1 @@
+console.log('my_to_onload_practice.js loaded');
