@@ -1,0 +1,1 @@
+document.addEventListener('DOMContentLoaded', () => alert("Дерево DOM готово после скрипта с 'defer'!"));
