@@ -208,3 +208,4 @@ function sortRows() {
 }
 
 nameRow.addEventListener('click', sortRows)
+
