@@ -3,7 +3,7 @@ const ul = document.getElementById('ul');
 let li;
 
 ul.addEventListener('click', (e) => {
-    if (li && (!e.ctrlKey || !e.metaKey)) li.classList.remove('selected'); 
+    if (li && (!e.ctrlKey)) li.classList.remove('selected'); 
 
     li = e.target.closest('li'); 
 
