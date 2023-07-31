@@ -84,3 +84,16 @@ p {
     border: 1px brown solid;
     padding: 3px;
 }
+
+#gate {
+    cursor: pointer;
+    margin-bottom: 100px;
+    width: 83px;
+    height: 46px;
+}
+
+#ball {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+}

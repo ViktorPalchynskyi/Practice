@@ -37,13 +37,8 @@ function showTooltip(anchorElem, text) {
 }
 
 class HoverIntent {
-  constructor({
-    sensitivity = 0.1, 
-    interval = 100, 
-    elem,
-    over,
-    out,
-  }) {
+  eventController = new AbortController();
+  constructor({ sensitivity = 0.1, interval = 100, elem, over, out }) {
     this.sensitivity = sensitivity;
     this.interval = interval;
     this.elem = elem;
@@ -54,9 +49,12 @@ class HoverIntent {
     this.onMouseOut = this.onMouseOut.bind(this);
     this.trackSpeed = this.trackSpeed.bind(this);
 
-    elem.addEventListener("mouseover", this.onMouseOver);
-
-    elem.addEventListener("mouseout", this.onMouseOut);
+    elem.addEventListener("mouseover", this.onMouseOver, {
+      signal: this.eventController.signal,
+    });
+    elem.addEventListener("mouseout", this.onMouseOut, {
+      signal: this.eventController.signal,
+    });
   }
 
   onMouseOver(event) {
@@ -69,7 +67,9 @@ class HoverIntent {
     this.prevY = event.pageY;
     this.prevTime = Date.now();
 
-    elem.addEventListener("mousemove", this.onMouseMove);
+    elem.addEventListener("mousemove", this.onMouseMove, {
+      signal: this.eventController.signal,
+    });
     this.checkSpeedInterval = setInterval(this.trackSpeed, this.interval);
   }
 
@@ -117,9 +117,7 @@ class HoverIntent {
   }
 
   destroy() {
-    elem.removeEventListener("mousemove", this.onMouseMove);
-    elem.removeEventListener("mouseover", this.onMouseOver);
-    elem.removeEventListener("mouseout", this.onMouseOut);
+    this.eventController.abort();
   }
 }
 
