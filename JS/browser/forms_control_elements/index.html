@@ -4,12 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <select id="genres">
-      <option value="rock">Рок</option>
-      <option value="blues" selected>Блюз</option>
-    </select>
+    Ваш email: <input type="email" id="input" placeholder="email" />
+    <div id="error"></div>
+    Ваш email: <input type="email" id="input2" />
+
+    <input
+      type="text"
+      style="width: 280px"
+      placeholder="введите неверный email и кликните сюда"
+    />
+
+    <ul>
+      <li tabindex="1">Один</li>
+      <li tabindex="0">Ноль</li>
+      <li tabindex="2">Два</li>
+      <li tabindex="-1">Минус один</li>
+    </ul>
+
+    <form id="form">
+      <input type="text" name="name" value="Имя" />
+      <input type="text" name="surname" value="Фамилия" />
+    </form>
   </body>
-  <script src="./form_elements_exercise.js"></script>
+  <script src="./focus_blur_practice.js"></script>
 </html>

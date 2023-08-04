@@ -1,0 +1,23 @@
+.invalid {
+    border-color: red;
+}
+
+#error {
+    color: red
+}
+
+.error {
+    background: red;
+}
+
+li {
+    cursor: pointer;
+}
+
+li:focus {
+    outline: 1px dashed green;
+}
+
+.focused {
+    outline: 1px solid red;
+}
