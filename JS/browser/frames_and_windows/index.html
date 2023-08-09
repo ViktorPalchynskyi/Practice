@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <button class="test">Click me</button>
-</body>
-<script src="./popup_window_practice.js"></script>
+  </head>
+  <body>
+    <form id="form">
+      <input type="text" placeholder="Введите сообщение" name="message" />
+      <input type="submit" value="Нажмите для отправки" />
+    </form>
+
+    <iframe src="iframe.html" id="iframe" name="win" style="display:block;height:600px; width:600px"></iframe>
+  </body>
+  <script src="./cross_window_communication_practice.js"></script>
 </html>

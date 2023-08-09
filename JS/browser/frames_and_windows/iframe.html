@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Hello there, I`m Paul</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
+      praesentium dolorum ipsum mollitia in iste assumenda aut dolores, quaerat,
+      placeat asperiores nulla, ea porro necessitatibus? Veritatis natus
+      provident atque eveniet.
+    </p>
+  </body>
+  <script>
+    window.addEventListener('message', (event) => {
+      console.log('origin ==> ', event.origin);
+      const div = document.createElement('div');
+      div.style.backgroundColor = 'coral';
+      div.innerHTML = event.data;
+
+      console.log('message ==>', event.data);
+      document.body.append(div);
+    });
+  </script>
+</html>
