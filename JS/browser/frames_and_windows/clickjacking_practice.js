@@ -1,0 +1,1 @@
+const cookie = 'Set-Cookie: authorization=secret; samesite';
