@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="index.css">
-</head>
-<body>
-    <h1>Hello there</h1>
-    <button onclick="alert('hello again')">Click me</button>
-</body>
-<script src="./indexedbd_practice.js"></script>
+    <link rel="stylesheet" href="index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/idb@3.0.2/build/idb.min.js"></script>
+  </head>
+  <body>
+    <button id="add" >Добавить книгу</button>
+    <button id="clear">Очистить хранилище</button>
+
+    <p>Список книг:</p>
+
+    <ul id="listElem"></ul>
+  </body>
+  <script src="./indexedbd_practice.js"></script>
 </html>
