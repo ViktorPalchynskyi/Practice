@@ -9,10 +9,8 @@ app.get('/', (req, res) => {
 });
 
 app.post('/user', (req, res) => {
-    console.log('POST', {
-        req, 
-        res
-    });
+    console.log('body', req.body);
+    res.send({ message: 'success' });
 }); 
 
 app.listen(port, () => {
