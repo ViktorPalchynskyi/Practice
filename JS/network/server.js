@@ -24,8 +24,13 @@ app.get('/', (req, res) => {
   res.send('<h1>Hello there</h1>');
 });
 
-app.get('/events', () => {
-
+app.use('/live-update', (req, res) => {
+  res.writeHead(200, {
+    Connection: 'keep-alive',
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Access-Control-Allow-Origin': '*',
+});
 });
 
 app.post('/user', (req, res) => {
