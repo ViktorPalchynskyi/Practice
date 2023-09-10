@@ -6,21 +6,10 @@
     <title>Document</title>
   </head>
   <body>
-    <form id="formElem">
-      <input type="text" name="name" value="John" />
-      <input type="text" name="surname" value="Smith" />
-      <input type="number" name="age" value=25 />
-      <canvas id="canvasElem" width="100" height="80" style="border:1px solid"></canvas>
-      Картинка: <input type="file" name="picture" accept="image/*">
-      <input type="submit" />
-      <form name="publish">
-        <input type="text" name="message" />
-        <input type="submit" value="Send" />
-      </form>
-      
-      <div id="subscribe">
-      </div>
-    </form>
+    <button onclick="start()">Старт</button> Нажмите кнопку "Старт" для начала
+    <div id="logElem" style="margin: 6px 0"></div>
+
+    <button onclick="stop()">Стоп</button> Чтобы закончить, нажмите "Стоп".
   </body>
-  <script src="./websocket_practice.js"></script>
+  <script src="./server_send_events_exercise.js"></script>
 </html>

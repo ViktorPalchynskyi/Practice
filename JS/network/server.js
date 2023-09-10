@@ -24,6 +24,10 @@ app.get('/', (req, res) => {
   res.send('<h1>Hello there</h1>');
 });
 
+app.get('/events', () => {
+
+});
+
 app.post('/user', (req, res) => {
   console.log('body', req.body);
   res.send({ message: 'success' });
@@ -37,3 +41,4 @@ app.post('/analytics', (req, res) => {
 app.listen(port, () => {
   console.log('Server started');
 });
+
