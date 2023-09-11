@@ -26,11 +26,28 @@ app.get('/', (req, res) => {
 
 app.use('/live-update', (req, res) => {
   res.writeHead(200, {
-    Connection: 'keep-alive',
+    'Connection': 'keep-alive',
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache',
     'Access-Control-Allow-Origin': '*',
-});
+  });
+
+  let i = 0;
+  let timer = setInterval(write, 1000);
+  write();
+
+  function write() {
+    i++;
+
+    if (i === 4) {
+      res.write('event: bye\ndata: buy-buy\n\n');
+      clearInterval(timer);
+      res.end();
+      return;
+    }
+
+    res.write('data: ' + i + '\n\n');
+  }
 });
 
 app.post('/user', (req, res) => {
@@ -46,4 +63,3 @@ app.post('/analytics', (req, res) => {
 app.listen(port, () => {
   console.log('Server started');
 });
-
