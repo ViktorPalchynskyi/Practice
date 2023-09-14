@@ -6,10 +6,10 @@
     <title>Document</title>
   </head>
   <body>
-    <button id="start">Старт</button> Нажмите кнопку "Старт" для начала
-    <div id="logElem" style="margin: 6px 0"></div>
-
-    <button id="stop">Стоп</button> Чтобы закончить, нажмите "Стоп".
-  </body>
-  <script src="./server_send_events_exercise.js"></script>
+    <form name="publish">
+      <input type="text" name="message">
+      <input type="submit" value="Отправить">
+    </form>
+    <div id="messages"></div>
+  <script src="./websocket_exercise.js"></script>
 </html>

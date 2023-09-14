@@ -1,9 +1,49 @@
 import express from 'express';
 import cors from 'cors';
+import { WebSocketServer } from 'ws';
+import * as http from 'http';
 const app = express();
 const jsonParser = express.json();
+const clients = new Set();
 
 const port = 3000;
+
+const server = http.createServer(app);
+const wss = new WebSocketServer({ server });
+
+server.listen(8000, () => {
+  console.log(`Server started on port ${server.address().port} :)`);
+});
+
+wss.on('connection', (ws) => {
+  clients.add(ws);
+
+  ws.on('message', (message) => {
+    console.log('message', message);
+    message = message.slice(0, 50);
+
+    for (const client of clients) {
+      client.send(message);
+    }
+  });
+
+  ws.on('close', () => clients.delete(ws));
+});
+
+// function onSocketConnect(ws) {
+//   clients.add(ws);
+
+//   ws.on('message', (message) => {
+//     console.log('message', message);
+//     message = message.slice(0, 50);
+
+//     for (const client of clients) {
+//       client.send(message);
+//     }
+//   });
+
+//   ws.on('close', () => clients.delete(ws));
+// }
 
 app.use(jsonParser);
 app.use(
@@ -24,9 +64,14 @@ app.get('/', (req, res) => {
   res.send('<h1>Hello there</h1>');
 });
 
+app.use('/websocket', (req, res) => {
+  console.log('some');
+  wss.handleUpgrade(req, req.socket, Buffer.alloc(0), onSocketConnect);
+});
+
 app.use('/live-update', (req, res) => {
   res.writeHead(200, {
-    'Connection': 'keep-alive',
+    Connection: 'keep-alive',
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache',
     'Access-Control-Allow-Origin': '*',
