@@ -1,3 +1,6 @@
+const click = document.querySelector('.click');
+click.addEventListener('click', () => console.log('Misha'));
+
 document.onclick = function (e) {
   const coords = document.getElementById("coords");
   coords.innerHTML = e.clientX + ":" + e.clientY;
