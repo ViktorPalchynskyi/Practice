@@ -11,11 +11,10 @@ const string5 = new TextDecoder().decode(uint8Array5);
 
 const encoder = new TextEncoder();
 const uint8Array4 = encoder.encode('Hello there');
+const rusEncode = encoder.encode('Привет, дружище! Как дела?');
+const rusDecode = new TextDecoder().decode(rusEncode);
 
 console.log('strings', {
-  string,
-  string2,
-  string3,
-  uint8Array4,
-  string5
+  rusEncode,
+  rusDecode
 });
