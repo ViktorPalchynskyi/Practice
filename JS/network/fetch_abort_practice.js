@@ -9,11 +9,9 @@ signal.addEventListener('abort', () => console.log('abort!!!'));
     const fechJobs = urls.map((url) => fetch(url, {
       signal: controller.signal,
     }))
-    const res = await Promise.all(fechJobs);
-    console.log(res);
+    await Promise.all(fechJobs);
     controller.abort();
   } catch (error) {
-    console.log('here');
     if (error.name === 'AbortError') {
       console.log(error);
     } else {
