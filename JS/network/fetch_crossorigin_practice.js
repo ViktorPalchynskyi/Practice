@@ -15,5 +15,4 @@ const localURL = 'http://localhost:3000/user';
   });
 
   const result = await res.json();
-  console.log(result);
 })();
