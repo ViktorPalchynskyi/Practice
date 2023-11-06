@@ -1,7 +1,5 @@
 const http = require('http');
 import http from 'http';
-// const url = require('url');
-// const querystring = require('querystring');
 const staticServer = require('node-static');
 
 
