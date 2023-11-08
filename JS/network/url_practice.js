@@ -8,11 +8,4 @@ const urlWithEncodedComponent = `htpps://google.com/search?q=${encodedURLCompone
 
 userURL.searchParams.append('name', 'Viktor @!:');
 
-console.log('url', {
-    userURL,
-    analyticsURL,
-    urlWithEncodedComponent,
-    encodedURL
-});
-
 alert(userURL)
