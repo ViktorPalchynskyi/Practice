@@ -30,21 +30,6 @@ wss.on('connection', (ws) => {
   ws.on('close', () => clients.delete(ws));
 });
 
-// function onSocketConnect(ws) {
-//   clients.add(ws);
-
-//   ws.on('message', (message) => {
-//     console.log('message', message);
-//     message = message.slice(0, 50);
-
-//     for (const client of clients) {
-//       client.send(message);
-//     }
-//   });
-
-//   ws.on('close', () => clients.delete(ws));
-// }
-
 app.use(jsonParser);
 app.use(
   cors((req, cb) => {
