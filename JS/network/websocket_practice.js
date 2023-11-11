@@ -18,8 +18,6 @@ socket.onclose = function (event) {
       `[close] Соединение закрыто чисто, код=${event.code} причина=${event.reason}`
     );
   } else {
-    // например, сервер убил процесс или сеть недоступна
-    // обычно в этом случае event.code 1006
     alert('[close] Соединение прервано');
   }
 };

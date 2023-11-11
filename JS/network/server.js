@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { WebSocketServer } from 'ws';
+import { Server as WebSocketServer } from 'ws';
 import * as http from 'http';
 const app = express();
 const jsonParser = express.json();
