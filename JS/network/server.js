@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { Server as WebSocketServer } from 'ws';
+import WebSocket, { WebSocketServer } from 'ws';
 import * as http from 'http';
 const app = express();
 const jsonParser = express.json();
@@ -9,7 +9,7 @@ const clients = new Set();
 const port = 3000;
 
 const server = http.createServer(app);
-const wss = new WebSocketServer({ server });
+const wss = new WebSocket('ws://localhost:8000');
 
 server.listen(8000, () => {
   console.log(`Server started on port ${server.address().port} :)`);
