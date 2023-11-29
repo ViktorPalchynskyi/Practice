@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Hello there</h1>
-    <time-formatted 
+    <!-- <time-formatted 
         year="numeric" 
         month="long" 
         day="numeric"
@@ -17,11 +17,12 @@
         second="numeric"
         time-zone-name="short"
         id="elem"
-    ></time-formatted>
+    ></time-formatted> -->
+    <live-timer id="elem"></live-timer>
     <button is="hello-button">Click Me</button>
     <button is="hello-button" disabled>Отключена</button>
 </body>
 <script>
-    setInterval(() => elem.setAttribute('datetime', new Date()), 1000);
+    elem.addEventListener('tick', event => console.log(event.detail));
 </script>
 </html>
