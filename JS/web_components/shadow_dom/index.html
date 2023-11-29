@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input::-webkit-slider-runnable-track {
+            background-color: coral;
+        }
+    </style>
+    <script>
+        customElements.define('show-hello', class extends HTMLElement {
+            connectedCallback() {
+                const shadow = this.attachShadow({ mode: 'open' });
+                console.log(shadow);
+                shadow.innerHTML = `
+                    <p>
+                        Hello, ${this.getAttribute('name')}    
+                    </p>
+                `;
+            }
+        });
+    </script>
+</head>
+<body>
+    <input type="range">
+    <show-hello name="Viktor"></show-hello>
+</body>
+</html>
