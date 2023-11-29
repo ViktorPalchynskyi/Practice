@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <template id="tmp">
+        <script>
+            alert('Konnichiwa!');
+        </script>
+        <div class="message">Konnichawa, sekai!</div>
+    </template>
+
+    <template id="tmpl">
+        <style> p { font-weight: bold; background-color: skyblue;} </style>
+        <p id="message"></p>
+    </template>
+
+    <div id="elem">Click me!</div>
+</body>
+<script>
+    const div = document.createElement('div');
+    div.append(tmp.content.cloneNode(true));
+    document.body.append(elem);
+
+    elem.onclick = function() {
+        this.attachShadow({ mode: 'open' });
+
+        this.shadowRoot.append(tmpl.content.cloneNode(true));
+        this.shadowRoot.getElementById('message').innerHTML = 'Kage kara konnichwa!';
+    };
+</script>
+</html>
