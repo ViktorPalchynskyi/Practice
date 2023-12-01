@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            font-weight: bold;
+        }
+
+        user-card {
+            --user-card-field-color: paleturquoise;
+        }
+    </style>
+</head>
+<body>
+    <template id="tmpl">
+        <style>
+            :host([centered]) {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                border-color: blue;
+            }
+
+            :host {
+                display: inline-block;
+                border: 1px solid red;
+                padding: 10px;
+            }
+
+            span {
+                background-color: aqua;
+            }
+
+            ::slotted(div) {
+                background-color: peachpuff;
+            }
+
+            .field {
+                color: var(--user-card-field-color, black);
+            }
+        </style>
+        <slot></slot>
+        <div class="field">Name: 
+            <slot name="username"></slot>
+        </div>
+        <div class="field">Birthday: 
+            <slot name="birthday"></slot>
+        </div>
+    </template>
+
+    <script>
+        customElements.define('user-card', class extends HTMLElement {
+            connectedCallback() {
+                this.attachShadow({ mode: 'open' }).append(tmpl.content.cloneNode(true));
+            }
+        })
+    </script>
+    <user-card>
+        <p>Ohayo!</p>
+        <div slot="username">
+            <div>
+                Okarin Rentarou
+            </div>
+        </div>
+    </user-card>
+    <user-card centered>
+        <p>Konnichiwa!</p>
+        <span>Boku wa anatakoto ga suki</span>
+    </user-card>
+
+    <user-card>
+        <span slot="username">John Smith</span>
+        <span slot="birthday">01.01.2001</span>
+    </user-card>
+</body>
+</html>
