@@ -13,7 +13,7 @@
             };
 
             .close {
-                background-color: skyblue;
+                font-size: 20px;
             }
         </style>
         <div class="menu">
@@ -49,17 +49,25 @@
         });
 
         customElements.define('custom-menu', class extends HTMLElement {
+            items = [];
+
             connectedCallback() {
                 this.attachShadow({ mode: 'open' });
                 this.shadowRoot.append(tmpl.content.cloneNode(true));
                 this.shadowRoot.querySelector('slot[name="title"]').addEventListener('click', () => {
                     this.shadowRoot.querySelector('.menu').classList.toggle('close');
                 });
+                this.shadowRoot.querySelector('slot[name="item"]').addEventListener('slotchange', (e) => {
+                    console.log('slotchange ', e.target.name);
+                    this.items = e.target.assignedElements().map(elem => elem.textContent);
+                    console.log(this.items);
+                });
+                
             }
         })
     </script>
 
-    <user-card>
+     <user-card>
         <div>I like to ...</div>
         <span slot="username">John Smith</span>
         <span slot="birthday">01.01.2021</span>
@@ -68,7 +76,7 @@
         <div>... Play piano</div>
     </user-card>
 
-    <custom-menu>
+    <custom-menu id="menu">
         <span slot="title">Сладости</span>
         <li slot="item">Леденцы</li>
         <li slot="item">Фруктовые тосты</li>
@@ -76,6 +84,12 @@
       </custom-menu>
     <script>
         // alert(document.querySelectorAll('span').length)
+        setTimeout(() => {
+            menu.insertAdjacentHTML('beforeend', '<li slot="item">Lolipop</li>')
+        }, 1000);
+        setTimeout(() => {
+            menu.querySelector('[slot="title"]').innerHTML = 'New title';
+        }, 1000);
     </script>
 </body>
 </html>
