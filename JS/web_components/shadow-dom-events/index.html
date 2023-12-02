@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        customElements.define('user-card',class extends HTMLElement {
+            connectedCallback() {
+                this.attachShadow({ mode: 'open' });
+                this.shadowRoot.innerHTML = `
+                    <p><button>Press me</button></p>
+                `;
+                this.shadowRoot.firstElementChild.onclick = e => {
+                    console.log(`Inner target element: ${e.target.tagName}`);
+                    console.log(`e.composedPath() ==>`, e.composedPath());
+                };
+                this.shadowRoot.dispatchEvent(new CustomEvent('test', {
+                    bubbles: true,
+                    composed: true,
+                    detail: 'composed',
+                }));
+                this.shadowRoot.dispatchEvent(new CustomEvent('test', {
+                    bubbles: true,
+                    composed: false,
+                    detail: 'not composed',
+                }));
+            }
+        })
+
+        document.onclick = e => console.log(`Outer target element: ${e.target.tagName}`);
+        document.addEventListener('test', event => console.log(`test ${event.detail}`));
+    </script>
+    <user-card>
+
+    </user-card>
+</body>
+</html>
