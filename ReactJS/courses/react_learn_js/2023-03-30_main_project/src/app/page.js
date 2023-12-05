@@ -15,8 +15,20 @@ export default function Home() {
     ]
   });
 
+  const Greeting = ({ name }) => {
+    return React.createElement('h1', {
+      children: [
+        'Hello',
+        React.createElement('span', { children: name }),
+        '. Welcome!',
+      ]
+    })
+  }
+
   console.log(elemnt);
 
-  return elemnt;
+  return React.createElement(Greeting, {
+    name: 'Viktor',
+  });
 }
  
