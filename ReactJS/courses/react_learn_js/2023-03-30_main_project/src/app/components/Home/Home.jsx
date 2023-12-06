@@ -3,9 +3,10 @@ import { Restaurant } from '@/app/components/Restaurant/Restaurant.jsx';
 
 
 export function Home() {
+    console.log(restaurants);
     return <div>
-        {restaurants.map(restaurant => (
-             <Restaurant restaurant={restaurant}/>
+        {restaurants.map((restaurant, index) => (
+             <Restaurant key={index} restaurant={restaurant}/>
         ))} 
     </div>
 } 
