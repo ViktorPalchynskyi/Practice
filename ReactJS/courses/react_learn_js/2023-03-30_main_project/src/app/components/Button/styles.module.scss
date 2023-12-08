@@ -1,0 +1,30 @@
+.primary {
+    background-color: coral;
+    color: white;
+    border-radius: 4px;
+    border: 0;
+} 
+
+.secondary {
+    background-color: skyblue;
+    border-radius: 4px;
+    border: 1px solid black;
+}
+
+.root {
+   padding: 5px 10px;
+   width: 50px;
+   height: 25px;
+   
+   cursor: pointer;
+   transition: opacity 0.2s, transform 0.2s;
+
+   &:hover {
+    opacity: 0.9;
+    transform: scale(1.2);
+   }
+}
+
+.disabled {
+    opacity: 0.5;
+}
