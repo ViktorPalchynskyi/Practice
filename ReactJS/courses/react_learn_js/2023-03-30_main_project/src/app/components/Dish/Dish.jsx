@@ -6,14 +6,8 @@ export const Dish = ({ dish }) => {
   const { id, name, price, ingredients } = dish;
 
   return (
-    <div key={id}>
-        <h4>{name}</h4>
-        <p>{`Price: ${price}`}</p>
-        {ingredients.map((ingredient, index) => 
-        <div key={index}>
-            {ingredient}
-        </div>
-        )}
+    <div>
+        <span>{name}</span>
     </div>
   );
 };

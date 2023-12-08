@@ -10,7 +10,7 @@ export const Restaurant = ({ restaurant }) => {
   
   return (
     <div key={id}>
-        <h3>{name}</h3>
+        <h2>{name}</h2>
         <Menu menu={menu}/>
         <Reviews reviews={reviews}/>
     </div>

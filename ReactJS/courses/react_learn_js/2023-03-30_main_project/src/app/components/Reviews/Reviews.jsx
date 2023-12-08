@@ -6,9 +6,15 @@ export const Reviews = ({ reviews }) => {
   }  
 
   return (
-    <div key={reviews.id}>
+    <div>
         <h3>Review</h3>
-        {reviews.map(review => <Review review={review}/>)}
+        <ul>
+            {reviews.map(review => (
+              <li key={review?.id}>
+                <Review review={review}/>
+              </li>
+            ))}
+        </ul>
     </div>
   );
 };

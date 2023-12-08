@@ -1,14 +1,20 @@
 import { Dish } from "../Dish/Dish";
 
 export const Menu = ({ menu }) => {
-  if (!menu) {
+  if (!menu?.length) {
     return null;
   }
 
   return (
-    <div key={menu.id}>
+    <div>
       <h3>Menu</h3>
-      {menu.map(dish => <Dish dish={dish}/>)}
+      <ul>
+        {menu.map(dish => (
+          <li  key={dish?.id}>
+            <Dish dish={dish}/>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

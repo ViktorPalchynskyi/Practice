@@ -3,10 +3,10 @@ export const Review = ({ review }) => {
     return null;
   }  
 
-  const { id, rating, text, user } = review;
+  const { rating, text, user } = review;
 
   return (
-    <div key={id}>
+    <div>
         <p>{`Rating: ${rating}`}</p>
         <p>{`Message: ${text}`}</p>
         <p>{`Customer: ${user}`}</p>
