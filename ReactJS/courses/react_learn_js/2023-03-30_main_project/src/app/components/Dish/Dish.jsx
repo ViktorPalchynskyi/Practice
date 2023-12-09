@@ -17,10 +17,10 @@ export const Dish = ({ dish }) => {
     <div>
         <span>{name}</span>
         <Button className={styles.decrementAction}>
-          <ThumbDown/>
+          <ThumbDown className={styles.icon}/>
         </Button>
         <Button type={'secondary'} className={styles.incrementAction}>
-          <ThumbUp/>
+          <ThumbUp className={styles.icon}/>
         </Button>
         <ul>
             {ingredients.map(({ name, id }) => (

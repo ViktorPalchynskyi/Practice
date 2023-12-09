@@ -1,3 +1,5 @@
+import { Rating } from '@/app/components/Rating/Rating.jsx'
+
 export const Review = ({ review }) => {
   if (!review) {
     return null;
@@ -7,7 +9,7 @@ export const Review = ({ review }) => {
 
   return (
     <div>
-        <p>{`Rating: ${rating}`}</p>
+        <Rating value={rating}/>
         <p>{`Message: ${text}`}</p>
         <p>{`Customer: ${user}`}</p>
     </div>
