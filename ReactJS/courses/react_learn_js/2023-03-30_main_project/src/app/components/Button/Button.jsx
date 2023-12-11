@@ -7,12 +7,18 @@ const buttonStyles = {
     secondary: styles.secondary,
 };
 
-export function Button({ children, disabled, type  = 'primary', className }) {
-    console.log(styles);
-    return <button className={classNames({
-        [styles.root]: true,
-        [buttonStyles[type]]: true,
-        [styles.disabled]: disabled,
-        [className]: true,  
-    })}>{children}</button>
+export function Button({ children, disabled, type  = 'primary', className, onClick }) {
+    return (
+        <button 
+            className={classNames({
+                [styles.root]: true,
+                [buttonStyles[type]]: true,
+                [styles.disabled]: disabled,
+                [className]: true,  
+            })}
+            onClick={onClick}
+        >
+            {children}
+        </button>
+    )
 }

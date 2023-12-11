@@ -1,27 +1,25 @@
 import Image from "next/image";
 import styles from './styles.module.scss'
 
-export const Rating = ({ maxRating = 5, value }) => {
-  const getRating = () => {
-    const ratingArr = [];
+const MAX_RATING = 5;
 
-    for (let i = 0; i < maxRating; i++) {
-        if (i + 1 <= value) {
-            ratingArr.push(<Image src='/images/star-gold.png' width={25} height={20} alt='rating'/>);
-            continue;
-        }
-
-        ratingArr.push(<Image src='/images/star.png' width={25} height={20} alt='rating'/>)
-    }
-
-    return ratingArr;
-  };  
-
-  const rating = getRating();
-
+export const Rating = ({ maxRating = MAX_RATING, value, className }) => {
   return (
-    <div className={styles.root}>
-        {...rating}
+    <div className={styles .root}>
+        {maxRating > 0 && 
+            new Array(maxRating)
+                .fill(null)
+                .map((_, index) => (
+                    <Image 
+                        src={`/images/star${index >= value ? '' : '-gold'}.png`} 
+                        width={32} 
+                        height={32}
+                        className={styles.star} 
+                        key={index}
+                        alt={index >= value ? 'black' : 'gold'}
+                    />
+                )) 
+        }
     </div>
   );
 };
