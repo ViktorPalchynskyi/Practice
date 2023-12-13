@@ -4,7 +4,12 @@ import classNames from "classnames";
 
 const MAX_RATING = 5;
 
-export const Rating = ({ maxRating = MAX_RATING, value, className, onClick }) => {
+export const Rating = ({ 
+  maxRating = MAX_RATING, 
+  value, 
+  className, 
+  onClick 
+}) => {
   return (
     <div className={styles .root}>
         {maxRating > 0 && 
@@ -12,12 +17,13 @@ export const Rating = ({ maxRating = MAX_RATING, value, className, onClick }) =>
                 .fill(null)
                 .map((_, index) => (
                     <Image 
-                        onClick={onClick}
-                        value={index + 1}
+                        onClick={() => onClick?.(index + 1)}
                         src={`/images/star${index >= value ? '' : '-gold'}.png`} 
                         width={32} 
                         height={32}
-                        className={classNames(styles.star, className)} 
+                        className={classNames(styles.star, className, {
+                          [styles.clickable]: !!onClick
+                        })} 
                         key={index}
                         alt={index >= value ? 'black' : 'gold'}
                     />

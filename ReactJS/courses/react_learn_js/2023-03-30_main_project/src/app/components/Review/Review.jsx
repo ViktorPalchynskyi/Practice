@@ -6,18 +6,11 @@ export const Review = ({ review }) => {
     return null;
   }  
 
-  const { rating, text, user } = review;
-  const [ratingToShow, setRatingToShow] = useState(() => rating);
-
-  const onRatingChange = (event) => {
-    const selectedRating = Number(event.target.getAttribute('value'));
-    
-    setRatingToShow(selectedRating)
-  }
+  const { rating, text, user } = review; 
 
   return (
     <div>
-        <Rating value={ratingToShow} onClick={onRatingChange}/>
+        <Rating value={rating}/>
         <p>{`Message: ${text}`}</p>
         <p>{`Customer: ${user}`}</p>
     </div>

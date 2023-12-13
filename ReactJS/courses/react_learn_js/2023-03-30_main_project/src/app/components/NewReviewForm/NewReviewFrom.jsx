@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import { Rating } from "../Rating/Rating";
 
 const initialState = {
     name: '',
@@ -42,10 +43,9 @@ export const NewReviewFrom = () => {
         </div>
         <div>
             <label>Rating</label>
-            <input 
-                type='number'
+            <Rating 
                 value={formValue.rating} 
-                onChange={(e) => dispatch({ type: 'setRating', payload: e.target.value })}
+                onClick={(rating) => dispatch({ type: 'setRating', payload: rating })}
             />
         </div>
     </div>

@@ -9,6 +9,9 @@ import { useState } from "react";
 
 export const Dish = ({ dish }) => {
   const [dishCount, setDishCount] = useState(0);
+  
+  const increment = () => setDishCount(dishCount + 1);
+  const decrement = () => setDishCount(dishCount - 1);
 
   if (!dish) {
     return null;
@@ -18,23 +21,34 @@ export const Dish = ({ dish }) => {
 
   return (
     <div>
-        <span>{name}</span>
-        <Button type={'secondary'} className={styles.incrementAction} onClick={() => setDishCount(dishCount > 0 ? dishCount - 1 : dishCount )}>
-          -
-        </Button>
-        <Button className={styles.decrementAction} onClick={() => setDishCount(dishCount < 5 ? dishCount + 1 : dishCount)}>
-          +
-        </Button>
         <div>
+          <span>{name}</span>
+          <Button 
+            type={'secondary'} 
+            className={styles.incrementAction} 
+            onClick={decrement}
+            disabled={dishCount === 0}
+          >
+            -
+          </Button>
           {dishCount}
+          <Button 
+            className={styles.decrementAction} 
+            onClick={increment}
+            disabled={dishCount === 5}
+          >
+            +
+          </Button>
+          
+          <ul>
+              {ingredients.map(({ name, id }) => (
+                <li key={id}>
+                  {name}
+                </li>
+              ))}
+          </ul>
         </div>
-        <ul>
-            {ingredients.map(({ name, id }) => (
-              <li key={id}>
-                {name}
-              </li>
-            ))}
-        </ul>
+        
     </div>
   );
 };
