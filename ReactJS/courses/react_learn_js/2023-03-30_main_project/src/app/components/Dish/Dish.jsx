@@ -1,17 +1,14 @@
-import { Button } from "../Button/Button";
+import { Button } from '../Button/Button';
 import styles from './styles.module.scss';
-import ThumbDown from './images/thumb-down.svg';
-import ThumbUp from './images/thumb-up.svg';
 import { useState } from "react";
+import { Ingredients } from "../Ingredients/Ingredients";
+import { useAmount } from '@/app/hooks/useAmount';
 
 // Valid for craete ReactApp
 // import { ReactComponent as ThumbUp } from './images/thumb-up.svg';
 
 export const Dish = ({ dish }) => {
-  const [dishCount, setDishCount] = useState(0);
-  
-  const increment = () => setDishCount(dishCount + 1);
-  const decrement = () => setDishCount(dishCount - 1);
+  const { increment, decrement, amount } = useAmount();
 
   if (!dish) {
     return null;
@@ -21,34 +18,26 @@ export const Dish = ({ dish }) => {
 
   return (
     <div>
-        <div>
-          <span>{name}</span>
+        <div className={styles.mainInfo}>
+          <span className={styles.title}>{name}</span>
           <Button 
             type={'secondary'} 
-            className={styles.incrementAction} 
+            className={styles.decrementAction} 
             onClick={decrement}
-            disabled={dishCount === 0}
+            disabled={amount === 0}
           >
             -
           </Button>
-          {dishCount}
+          {amount}
           <Button 
-            className={styles.decrementAction} 
+            className={styles.incrementAction} 
             onClick={increment}
-            disabled={dishCount === 5}
+            disabled={amount === 5}
           >
             +
           </Button>
-          
-          <ul>
-              {ingredients.map(({ name, id }) => (
-                <li key={id}>
-                  {name}
-                </li>
-              ))}
-          </ul>
         </div>
-        
+        {amount > 0 && <Ingredients ingredients={ingredients} className={styles.ingredients}/>}
     </div>
   );
 };

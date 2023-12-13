@@ -3,34 +3,29 @@ import { Restaurant } from '@/app/components/Restaurant/Restaurant.jsx';
 import { nanoid } from "nanoid";
 import { Header } from '../Header/Header';
 import { Tabs } from '@/app/components/Tabs/Tabs.jsx';
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 export function Home() {
-    const [activeRestaurantIndex, setActiveRestaurantIndex] = useState(() => localStorage.getItem('activeRestaurantIndex') || 0);
-    function getRestaurants() {
-        return restaurants.map(restaurant => ({
-            ...restaurant,
-            menu: restaurant.menu.map(dish => ({
-                ...dish,
-                ingredients: dish.ingredients.map(ingredient => ({
-                    id: nanoid(),
-                    name: ingredient,
-                }))
-            }))
-        }));
+    const [activeRestaurantIndex, setActiveRestaurantIndex] = useState(0);
+    const setActiveRestaurantIndexWithCache = (index) => {
+        setActiveRestaurantIndex(index);
+        localStorage.setItem('activeRestaurantIndex', index); 
     };
 
-    const customerRestaurants = getRestaurants();
-    const activeRestaurant = customerRestaurants[activeRestaurantIndex];
+    const activeRestaurant = restaurants[activeRestaurantIndex];
 
-    useEffect(() => {
-       localStorage.setItem('activeRestaurantIndex', activeRestaurantIndex); 
-    }, [activeRestaurantIndex]);
+    useLayoutEffect(() => {
+        const savedActiveRestaurantIndex = localStorage.getItem('activeRestaurantIndex');
+
+        if (savedActiveRestaurantIndex) {
+            setActiveRestaurantIndex(savedActiveRestaurantIndex); 
+        }
+     }, []);
 
     return (
         <div>
             <Header />
-            <Tabs restaurants={customerRestaurants} onTabClick={setActiveRestaurantIndex}/>
+            <Tabs restaurants={restaurants} onTabClick={setActiveRestaurantIndexWithCache}/>
             <Restaurant key={activeRestaurant.id} restaurant={activeRestaurant}/>
         </div>
     );

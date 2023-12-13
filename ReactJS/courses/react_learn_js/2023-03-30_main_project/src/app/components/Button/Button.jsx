@@ -7,7 +7,13 @@ const buttonStyles = {
     secondary: styles.secondary,
 };
 
-export function Button({ children, disabled, type  = 'primary', className, onClick }) {
+export function Button({ 
+    children, 
+    type  = 'primary', 
+    className, 
+    onClick,
+    disabled
+}) {
     return (
         <button 
             className={classNames({
@@ -17,6 +23,7 @@ export function Button({ children, disabled, type  = 'primary', className, onCli
                 [className]: true,  
             })}
             onClick={onClick}
+            disabled={disabled}
         >
             {children}
         </button>
