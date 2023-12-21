@@ -9,7 +9,6 @@ export function Home() {
         activetIndex: activeRestaurantIndex, 
         setActivetIndexWithCache: setActiveRestaurantIndexWithCache 
     } = useCachedActiveIndex({ 
-        initialIndex: 0, 
         localStorageIndexName: 'activeRestaurantIndex' 
     });
 

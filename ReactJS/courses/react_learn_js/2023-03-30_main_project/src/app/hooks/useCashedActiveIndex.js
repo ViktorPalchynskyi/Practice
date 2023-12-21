@@ -1,14 +1,14 @@
-import { useState, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect, useCallback } from 'react';
 
 export const useCachedActiveIndex = ({ initialIndex = 0, localStorageIndexName }) => {
     const [activetIndex, setActivetIndex] = useState(initialIndex);
-    const setActivetIndexWithCache = (index) => {
+    const setActivetIndexWithCache = useCallback((index) => {
         setActivetIndex(index);
         localStorage.setItem(localStorageIndexName, index); 
-    };
+    }, localStorageIndexName);
 
     useLayoutEffect(() => {
-        const savedActiveIndex = localStorage.getItem(localStorageIndexName);
+        const savedActiveIndex = Number(localStorage.getItem(localStorageIndexName));
 
         if (savedActiveIndex) {
             setActivetIndex(savedActiveIndex); 
