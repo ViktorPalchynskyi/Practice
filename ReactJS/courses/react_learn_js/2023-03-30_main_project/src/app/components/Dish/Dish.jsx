@@ -1,14 +1,16 @@
 import { Button } from '../Button/Button';
 import styles from './styles.module.scss';
-import { useState } from "react";
 import { Ingredients } from "../Ingredients/Ingredients";
-import { useAmount } from '@/app/hooks/useAmount';
+import { useDispatch, useSelector } from '@/app/CustomStore';
 
 // Valid for craete ReactApp
 // import { ReactComponent as ThumbUp } from './images/thumb-up.svg';
 
 export const Dish = ({ dish }) => {
-  const { increment, decrement, amount } = useAmount();
+  const amount = useSelector((state) => state[dish.name] || 0);
+  const dispatch = useDispatch();
+  const increment = () => dispatch({ type: 'increment', payload: dish.name });
+  const decrement = () => dispatch({ type: 'decrement', payload: dish.name });
 
   if (!dish) {
     return null;

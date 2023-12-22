@@ -20,11 +20,6 @@ export const Restaurant = ({ restaurant }) => {
     return null;
   }
 
-  useEffect(() => {
-    // ref.current = setInterval(() => console.log('Ping'), 500);
-    console.log(ref.current);
-  }, []);
-
   return (
     <div ref={ref} key={id}>
         <h2>{name}</h2>
