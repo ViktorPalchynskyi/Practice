@@ -21,11 +21,11 @@ server.on('request', (req, res) => {
     stream.pipe(res); 
     stream.on('error', error => {
         if (error.code === 'ENOENT') {
-        res.statusCode = 404;
-        res.end('file not found');
+            res.statusCode = 404;
+            res.end('file not found');
         } else {
-        res.statusCode = 500;
-        res.end('something went wrong');
+            res.statusCode = 500;
+            res.end('something went wrong');
         }
     });
     stream.on('open', () => console.log('open'));

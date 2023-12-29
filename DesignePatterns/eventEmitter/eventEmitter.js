@@ -8,10 +8,7 @@ class EventEmitter {
             throw Error('Listener must be a fucntion.');
         }
         
-        if (!this.events[eventName]) {
-            this.events[eventName] = [];
-        }
-
+        this.events[eventName] = this.events[eventName] || [];
         this.events[eventName].push(func);
     }    
 
