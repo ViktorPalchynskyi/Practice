@@ -8,19 +8,10 @@ class ReplacerStream extends stream.Transform {
     }
 
     _transform(chunk, encoding, callback) {
-        callback(null, chunk.toString().replaceAll(this.from, this.to));
+        setTimeout(() => {
+            callback(null, chunk.toString().replaceAll(this.from, this.to));
+        }, 100);
     }
 }
 
 module.exports = ReplacerStream;
-
-const replacer = new ReplacerStream({
-    from: 'apple',
-    to: 'avacado'
-});
-
-replacer.on('data', chunk => {
-    console.log(chunk.toString('utf-8'));
-});
-
-replacer.write('apple watermelon orange banana')

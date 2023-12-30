@@ -5,21 +5,20 @@ const server = http.createServer();
 
 server.on('request', (req, res) => {
     const url = new URL(req.url, 'http://localhost:3000');
-    console.log(url);
-    console.log(url.searchParams.get('from'));
-    console.log(url.searchParams.get('to'));
+    const from = url.searchParams.get('from');
+    const to  = url.searchParams.get('to');
+
+    if (!from || !to) {
+        res.statusCode = 400;
+        res.end('bad request: `from` and `to` are mandatory');
+    }
+
     const replacer = new ReplacerStream({
-        from: url.searchParams.get('from'),
-        to: url.searchParams.get('to'),
+        from,
+        to,
     });
-
-    // req.on('data', chunk => {
-    //     replacer.write(chunk);
-    // });
-
-    // replacer.on('data', chunk => res.write(chunk));
-
+    
     req.pipe(replacer).pipe(res);
 });
 
-server.listen(3000);
+module.exports = server;
