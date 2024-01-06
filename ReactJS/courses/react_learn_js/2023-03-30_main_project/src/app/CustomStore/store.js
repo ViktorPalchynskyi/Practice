@@ -30,7 +30,7 @@ class Store {
     }
 }
 
-export const createStore = (function () {
+export const createStore = (() => {
     let store;
 
     return (rootReducer) => {
