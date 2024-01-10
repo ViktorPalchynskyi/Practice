@@ -3,7 +3,7 @@ import { Ingredient } from "../Ingredient/Ingredient";
 import styles from './styles.module.scss';
 
 export const Ingredients = ({ ingredients, className }) => {
-  if (!ingredients.length) {
+  if (!ingredients?.length) {
     return null;
   }
 

@@ -7,7 +7,7 @@ export const useSelector = (selector) => {
    
 
     useEffect(() => {
-        const callback = (value) => setValue(selector(value));
+        const callback = (state) => setValue(selector(state));
 
         store.subscribe(callback);
 

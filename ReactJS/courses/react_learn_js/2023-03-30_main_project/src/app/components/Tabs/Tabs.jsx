@@ -1,19 +1,19 @@
 import React from "react";
 import { Button } from '@/app/components/Button/Button.jsx';
 
-export const Tabs = ({ restaurants, onTabClick }) => {
-  if (!restaurants?.length) {
+export const Tabs = ({ tabs, onTabClick }) => {
+  if (!tabs?.length) {
     return null;
   }
-
+  
   return (
     <div>
-        {restaurants.map((restaurant, index) => (
+        {tabs.map(({ id, title }) => (
             <Button 
-                key={restaurant.id}
-                onClick={() => onTabClick(index)}
+                key={id}
+                onClick={() => onTabClick(id)}
             >
-                {restaurant.name}
+                {title}
             </Button>
         ))}
     </div>
