@@ -17,7 +17,6 @@ class Store {
     }
 
     dispatch(action) {
-        console.log('dispatch this', this);
         this.state = this.rootReducer(this.state, action);
 
         this.subscribers.forEach(callback => {

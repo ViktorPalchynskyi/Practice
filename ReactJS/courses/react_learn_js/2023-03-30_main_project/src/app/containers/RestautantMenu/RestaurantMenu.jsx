@@ -10,7 +10,5 @@ export const RestaurantMenuContainer = ({ restaurantId }) => {
     return null;
   }
 
-  console.log('RestaurantMenuContainer ==> menu', menu);
-
   return <Menu menu={menu}/>;
 };

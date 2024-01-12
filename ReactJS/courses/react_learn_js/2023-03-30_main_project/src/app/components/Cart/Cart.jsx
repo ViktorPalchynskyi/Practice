@@ -6,8 +6,6 @@ import { DishContainer } from "@/app/containers/Dish/Dish";
 export const Cart = () => {
   const cartState = useSelector(selectCartModule);
   
-  console.log('Cart ==> cartState', cartState);
-
   return (
     <ul>
         {Object.entries(cartState).map(([id]) => (
