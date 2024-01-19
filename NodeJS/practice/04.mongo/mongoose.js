@@ -79,7 +79,6 @@ async function main() {
     });
 
     // 2.5. Create index
-
     productSchema.index({ currency: 1, price: 1 });
 
     // 3 Use!
