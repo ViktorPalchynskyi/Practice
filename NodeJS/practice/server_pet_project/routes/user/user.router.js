@@ -1,15 +1,11 @@
 const Router = require('koa-router');
-const { getAllUsers, createUser } = require('../../controllers/userController');
+const { getAllUsers, createUser, login } = require('../../controllers/userController');
 
 const router = new Router();
 
 router
     .get('/all', getAllUsers)
-    .get('/auth', (ctx) => {
-        console.log('User authenicated');
-
-        ctx.body = 'authenicated';
-    })
+    .post('/login', login)
     .post('/create', createUser);
 
 

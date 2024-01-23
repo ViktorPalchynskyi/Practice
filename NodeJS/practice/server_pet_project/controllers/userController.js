@@ -1,4 +1,6 @@
+const { v4: uuid } = require('uuid');
 const User = require('../models/userModel');
+const passport = require('../utils/passport');
 
 async function getAllUsers(ctx) {
     try {
@@ -15,14 +17,20 @@ async function getAllUsers(ctx) {
     }  
 }
 
-async function authUser (ctx) {
-    const users = await User.findOne({});
+async function login (ctx, next) {
+    await passport.authenticate('local', async (err, user, info) => {
+        if (err) throw err;
+        console.log({ err, user, info });
+        if (!user) {
+            ctx.status = 400;
+            ctx.body = { error: info };
+            return;
+        }
 
-    if (!allUsers.length) {
-        ctx.body = { users: [] };
-    }
+        const token = uuid();
 
-    ctx.body = { users };
+        ctx.body = { token };
+    })(ctx, next);
 }
 
 async function createUser(ctx) {
@@ -53,4 +61,5 @@ async function createUser(ctx) {
 module.exports = {
     getAllUsers,
     createUser,
+    login,
 };
