@@ -1,6 +1,6 @@
 const User = require('../models/userModel');
 
-const getAllUsers = async (ctx) => {
+async function getAllUsers(ctx) {
     try {
         const users = await User.find({});
 
@@ -13,9 +13,9 @@ const getAllUsers = async (ctx) => {
         console.error('getAllUsers error:', error);
         ctx.throw(500, 'Internal server error.');
     }  
-};
+}
 
-const authUser = async (ctx) => {
+async function authUser (ctx) {
     const users = await User.findOne({});
 
     if (!allUsers.length) {
@@ -23,9 +23,9 @@ const authUser = async (ctx) => {
     }
 
     ctx.body = { users };
-};
+}
 
-const createUser = async (ctx) => {
+async function createUser(ctx) {
     console.log();
     const { name, surname, email, password } = ctx.request.body;
 
@@ -38,15 +38,17 @@ const createUser = async (ctx) => {
             name,
             surname,
             email,
-            password,
         });
+
+        await user.setPassword(password);
+        await user.save();
 
         ctx.body = { user };
     } catch (error) {
         console.error('createUser error:', error);
         ctx.throw(500, 'Internal server error.');
     }
-};
+}
 
 module.exports = {
     getAllUsers,

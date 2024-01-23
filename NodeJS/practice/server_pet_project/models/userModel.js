@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const { generateSalt, generatePassword } = require('../utils/hash');
 
 const userSchema = new Schema({
     name: {
@@ -24,9 +25,24 @@ const userSchema = new Schema({
     },
     password: {
         type: Schema.Types.String,
-        required: true,
     },
+    salt: {
+        type: Schema.Types.String,
+    }
 });
+
+userSchema.methods.setPassword = async function setPassword(password) {
+    this.salt = await generateSalt();
+    this.password = await generatePassword(this.salt, password);
+};
+
+userSchema.methods.checkPassword = async function checkPassword(password) {
+    if (!password) return false;
+
+    const hash = await generatePassword(this.salt, password);
+
+    return this.password === hash;
+};
 
 userSchema.index({ email: 1 });
 
