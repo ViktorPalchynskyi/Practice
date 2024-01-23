@@ -11,7 +11,16 @@ const userSchema = new Schema({
     },
     email: {
         type: Schema.Types.String,
-        required: true,
+        required: 'Email should not be empty.',
+        validate: [
+            {
+                validator(value) {
+                    return /^[-.\w]+@([\w-]+\.)+[\w-]{2,12}$/.test(value);
+                },
+                message: 'Invalid email.'
+            }
+        ],
+        unique: 'Email allready exist.'
     },
     password: {
         type: Schema.Types.String,
