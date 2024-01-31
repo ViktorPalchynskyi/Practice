@@ -1,5 +1,5 @@
 const crypto = require('node:crypto');
-const config = require('../config');
+const config = require('../config/config');
 
 function generatePassword(salt, password) {
     const { iterations, length, digest } =  config.crypto;

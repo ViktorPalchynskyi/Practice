@@ -1,6 +1,6 @@
 const { v4: uuid } = require('uuid');
 const User = require('../models/userModel');
-const passport = require('../utils/passport');
+const passport = require('../../../utils/passport');
 
 async function getAllUsers(ctx) {
     try {
@@ -34,7 +34,6 @@ async function login (ctx, next) {
 }
 
 async function createUser(ctx) {
-    console.log();
     const { name, surname, email, password } = ctx.request.body;
 
     if (!name || !surname || !email || !password) {

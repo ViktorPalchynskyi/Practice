@@ -1,9 +1,10 @@
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('../../models/userModel');
+const User = require('../../api/v1/models/userModel');
 
 module.exports = new LocalStrategy(
     { usernameField: 'email', session: false },
     async (email, password, done) => {
+        throw new Error('Idid na huy')
         const user = await User.findOne({ email });
 
         if (!user) {
