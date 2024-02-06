@@ -4,7 +4,6 @@ const User = require('../../api/v1/models/userModel');
 module.exports = new LocalStrategy(
     { usernameField: 'email', session: false },
     async (email, password, done) => {
-        throw new Error('Idid na huy')
         const user = await User.findOne({ email });
 
         if (!user) {
@@ -13,7 +12,7 @@ module.exports = new LocalStrategy(
 
 
         const passportHash = await user.checkPassword(password);
-        console.log('LocalStrategy', { user, email, password, passportHash });
+        
         if (!passportHash) {
             return done(null, false, 'Incorrect password.');
         }

@@ -19,8 +19,9 @@ async function getAllUsers(ctx) {
 
 async function login (ctx, next) {
     await passport.authenticate('local', async (err, user, info) => {
+
         if (err) throw err;
-        console.log({ err, user, info });
+        
         if (!user) {
             ctx.status = 400;
             ctx.body = { error: info };
@@ -34,6 +35,7 @@ async function login (ctx, next) {
 }
 
 async function createUser(ctx) {
+    console.log();
     const { name, surname, email, password } = ctx.request.body;
 
     if (!name || !surname || !email || !password) {
