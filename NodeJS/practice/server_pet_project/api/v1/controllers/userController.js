@@ -1,6 +1,6 @@
 const { v4: uuid } = require('uuid');
-const User = require('../models/userModel');
-const passport = require('../../../utils/passport');
+const User = require('@database/user');
+const passport = require('@utils/strategies');
 
 async function getAllUsers(ctx) {
     try {

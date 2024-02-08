@@ -1,7 +1,7 @@
 const { connect } = require('mongoose');
 const config = require('./config');
 
-const connctDB = async () => {
+async function connctDB() {
     try {
         await connect(config.mongodb.uri);
 

@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const { generateSalt, generatePassword } = require('../../../utils/hash');
+const { generateSalt, generatePassword } = require('@utils/helpers');
 
 // TODO: check unique validation for email
 const userSchema = new Schema({

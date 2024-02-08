@@ -1,5 +1,5 @@
 const { KoaPassport } = require('koa-passport');
-const localStrategy = require('./strategies/local');
+const localStrategy = require('./local');
 
 const passport = new KoaPassport();
 

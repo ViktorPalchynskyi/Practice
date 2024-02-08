@@ -1,5 +1,5 @@
 const fs = require('node:fs');
-const { addExtentionToFileName, getFilePath } = require('../../../utils/helpers');
+const { addExtentionToFileName, getFilePath } = require('@utils/helpers');
 
 async function getFile(ctx) {
     const { fileName } = ctx.query;

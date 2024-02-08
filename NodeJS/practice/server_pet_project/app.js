@@ -1,7 +1,7 @@
 const Koa = require('koa');
 const bodyParseer = require('koa-bodyparser');
 const router = require('./api/v1/routes');
-const errorHandlingMiddleware = require('./utils/middlewares/errorHandling.middleware');
+const { errorHandlingMiddleware } = require('@utils/middlewares');
 
 const app = new Koa();
 
