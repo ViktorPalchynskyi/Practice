@@ -1,5 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('@database/user');
+const User = require('@database/v1/user');
 
 module.exports = new LocalStrategy(
     { usernameField: 'email', session: false },

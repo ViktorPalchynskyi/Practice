@@ -20,4 +20,7 @@ module.exports = {
         length: 128,
         digest: 'sha512',
     },
+    app: {
+        nodeEnv: process.env.NODE_ENV,
+    }
 };

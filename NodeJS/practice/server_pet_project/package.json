@@ -19,14 +19,16 @@
     "mongoose": "^8.1.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "winston": "^3.11.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.3"
   },
   "_moduleAliases": {
     "@utils": "./utils",
-    "@database": "./api/v1/models",
-    "@config": "./config/"
+    "@config": "./config/",
+    "@database/v1": "./api/v1/models",
+    "@controllers/v1": "./api/v1/controllers"
   }
 }

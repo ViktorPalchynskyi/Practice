@@ -1,5 +1,5 @@
 const Router = require('koa-router');
-const { getFile, createFile } = require('../../controllers/fileController');
+const { getFile, createFile } = require('@controllers/v1');
 
 const router = new Router();
 
