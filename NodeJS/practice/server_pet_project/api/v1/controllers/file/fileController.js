@@ -16,9 +16,9 @@ async function getFile(ctx) {
 
         const readStream = fs.createReadStream(filePath);
 
-        readStream.on('open', (chunk) => logger.debug('getFile - Stream opended %s', chunk));
-        readStream.on('data', (chunk) => logger.debug('getFile - Data %s', chunk));
-        readStream.on('error', (error) => logger.error('getFile error - caught exception: %s', error));
+        readStream.on('open', (chunk) => logger.debug('getFile - Stream opended => [%s]', chunk));
+        readStream.on('data', (chunk) => logger.debug('getFile - Data => [%s]', chunk));
+        readStream.on('error', (error) => logger.error('getFile error - caught exception: [%s]', error));
         readStream.on('end', () => logger.debug('getFile - Stream end'));
 
         ctx.body = readStream;

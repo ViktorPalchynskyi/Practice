@@ -14,3 +14,21 @@
 [31m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
 [31m    at async errorHandling (/home/viktor/IT/Practice/NodeJS/practice/server_pet_project/utils/middlewares/errorHandling.middleware.js:3:7)[39m
 [31m    at async bodyParser (/home/viktor/IT/Practice/NodeJS/practice/server_pet_project/node_modules/koa-bodyparser/index.js:78:5)[39m
+[32minfo[39m [2024-02-10T10:06:44.335Z] logger.middleware: - [32mGET /api/v1/users/all - 5[39m
+[32minfo[39m [2024-02-10T10:07:39.962Z] logger.middleware - [32m(GET) /api/v1/users/all - 5ms[39m
+[32minfo[39m [2024-02-10T10:07:55.136Z] logger.middleware - [32m(GET) /api/v1/files?fileName=message - 1ms[39m
+[34mdebug[39m [2024-02-10T10:07:55.136Z] api:v1:controllers:file:fileController.js - [34mgetFile - Stream opended 48[39m
+[34mdebug[39m [2024-02-10T10:07:55.139Z] api:v1:controllers:file:fileController.js - [34mgetFile - Data Hello there! I`m a random text to fill the space[39m
+[34mdebug[39m [2024-02-10T10:07:55.140Z] api:v1:controllers:file:fileController.js - [34mgetFile - Stream end[39m
+[32minfo[39m [2024-02-10T10:09:39.765Z] logger.middleware - [32m(GET) /api/v1/files?fileName=message - 1ms[39m
+[34mdebug[39m [2024-02-10T10:09:39.767Z] api:v1:controllers:file:fileController.js - [34mgetFile - Stream opended [47][39m
+[34mdebug[39m [2024-02-10T10:09:39.767Z] api:v1:controllers:file:fileController.js - [34mgetFile - Data [Hello there! I`m a random text to fill the space][39m
+[34mdebug[39m [2024-02-10T10:09:39.770Z] api:v1:controllers:file:fileController.js - [34mgetFile - Stream end[39m
+[32minfo[39m [2024-02-10T10:10:57.101Z] logger.middleware - [32m(GET) /api/v1/files?fileName=message - 2ms[39m
+[34mdebug[39m [2024-02-10T10:10:57.102Z] api:v1:controllers:file:fileController.js - [34mgetFile - Stream opended -> [47][39m
+[34mdebug[39m [2024-02-10T10:10:57.103Z] api:v1:controllers:file:fileController.js - [34mgetFile - Data -> [Hello there! I`m a random text to fill the space][39m
+[34mdebug[39m [2024-02-10T10:10:57.105Z] api:v1:controllers:file:fileController.js - [34mgetFile - Stream end[39m
+[32minfo[39m [2024-02-10T10:11:11.007Z] logger.middleware - [32m(GET) /api/v1/files?fileName=message - 1ms[39m
+[34mdebug[39m [2024-02-10T10:11:11.008Z] api:v1:controllers:file:fileController.js - [34mgetFile - Stream opended => [47][39m
+[34mdebug[39m [2024-02-10T10:11:11.009Z] api:v1:controllers:file:fileController.js - [34mgetFile - Data => [Hello there! I`m a random text to fill the space][39m
+[34mdebug[39m [2024-02-10T10:11:11.010Z] api:v1:controllers:file:fileController.js - [34mgetFile - Stream end[39m

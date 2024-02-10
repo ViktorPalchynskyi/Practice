@@ -16,7 +16,7 @@ async function getAllUsers(ctx) {
 
         ctx.body = { users };
     } catch (error) {
-        logger.error('getAllUsers - caught exception: %s', error);
+        logger.error('getAllUsers - caught exception: [%s]', error);
         ctx.throw(500, 'Internal server error.');
     }  
 }
@@ -38,7 +38,7 @@ async function login (ctx, next) {
             ctx.body = { token };
         })(ctx, next);
     } catch (error) {
-        logger.error('login - caught exception: %s', error);
+        logger.error('login - caught exception: [%s]', error);
         ctx.throw(500, 'Internal server error.');
     }
 }
@@ -62,7 +62,7 @@ async function createUser(ctx) {
 
         ctx.body = { user };
     } catch (error) {
-        logger.error('createUser - caught exception: %s', error);
+        logger.error('createUser - caught exception: [%s]', error);
         ctx.throw(500, 'Internal server error.');
     }
 }
