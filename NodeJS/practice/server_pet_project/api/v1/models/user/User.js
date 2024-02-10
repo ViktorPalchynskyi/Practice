@@ -45,7 +45,7 @@ userSchema.methods.checkPassword = async function checkPassword(password) {
     return this.password === hash;
 };
 
-userSchema.index({ email: 1 });
+// userSchema.index({ email: 1 });
 
 const User = model('User', userSchema);
 

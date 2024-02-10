@@ -47,7 +47,7 @@ class Logging {
 
     getTransportsPatterns() {
         const transportsPatterns = {
-            production: [
+            production: () => [
                 new transports.DailyRotateFile({
                     filename: 'combine.log',
                     datePattern: this.datePattern,
@@ -76,36 +76,9 @@ class Logging {
                     )
                 }),
             ],
-            development: [
-                new transports.DailyRotateFile({
-                    filename: 'combine.log',
-                    datePattern: this.datePattern,
-                    zippedArchive: true,
-                    maxSize: this.maxSize,
-                    maxFiles: this.maxFiles,
-                    format: combine(
-                        format.timestamp(),
-                        label({ label: this.namespace }),
-                        format.splat(),
-                        this.verboseFormat(),
-                    )
-                }),
-                new transports.DailyRotateFile({
-                    filename: 'error.log',
-                    level: 'error',
-                    datePattern: this.datePattern,
-                    zippedArchive: true,
-                    maxSize: this.maxSize,
-                    maxFiles: this.maxFiles,
-                    format: combine(
-                        format.timestamp(),
-                        label({ label: this.namespace }),
-                        format.splat(),
-                        this.verboseFormat(),
-                    )
-                }),
+            development: () => [
                 new transports.Console({
-                    level: 'debug',
+                    level: this.level,
                     format: combine(
                         format.timestamp(),
                         label({ label: this.namespace }),
@@ -116,7 +89,7 @@ class Logging {
             ],
         };
     
-        return transportsPatterns[this.appMode || 'development'];
+        return transportsPatterns[this.appMode || 'development']();
     };
 
     formatLoggerMessage(data) {
