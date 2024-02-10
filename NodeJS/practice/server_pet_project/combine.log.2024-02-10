@@ -1,0 +1,16 @@
+[2024-02-10T04:40:10.777Z] core::userController:: [32m(GET) /api/v1/users/all - 30ms[39m
+[2024-02-10T04:41:57.941Z] core::userController:: [32m(GET) /api/v1/users/all - 4ms[39m
+[2024-02-10T04:42:22.296Z] core::userController:: [31m(GET) /api/v1/users/all - 4ms[39m
+[2024-02-10T04:42:37.901Z] core::userController:: [33m(GET) /api/v1/users/all - 5ms[39m
+[32minfo[39m [2024-02-10T04:45:36.463Z] core::userController:: [32m(GET) /api/v1/users/all - 5ms[39m
+[34mdebug[39m [2024-02-10T04:46:22.560Z] core::userController:: [34m(GET) /api/v1/users/all - 5ms[39m
+[34mdebug[39m [2024-02-10T04:46:41.093Z] core::userController:: [34m(GET) /api/v1/users/all - 4ms[39m
+[34mdebug[39m [2024-02-10T04:54:02.496Z] core::userController:: [34m(GET) /api/v1/users/all - 5ms[39m
+[34mdebug[39m [2024-02-10T04:59:55.242Z] api:v1:controllers:user:userController.js [34m(GET) /api/v1/users/all - 4ms[39m
+[34mdebug[39m [2024-02-10T05:00:32.103Z] api:v1:controllers:user:userController.js -- [34m(GET) /api/v1/users/all - 9ms[39m
+[34mdebug[39m [2024-02-10T05:00:39.313Z] api:v1:controllers:user:userController.js - [34m(GET) /api/v1/users/all - 5ms[39m
+[31merror[39m [2024-02-10T09:16:55.306Z] api:v1:controllers:user:userController.js - [31mgetAllUsers error - caught exception: Error: Buy buy[39m
+[31m    at getAllUsers (/home/viktor/IT/Practice/NodeJS/practice/server_pet_project/api/v1/controllers/user/userController.js:17:15)[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+[31m    at async errorHandling (/home/viktor/IT/Practice/NodeJS/practice/server_pet_project/utils/middlewares/errorHandling.middleware.js:3:7)[39m
+[31m    at async bodyParser (/home/viktor/IT/Practice/NodeJS/practice/server_pet_project/node_modules/koa-bodyparser/index.js:78:5)[39m

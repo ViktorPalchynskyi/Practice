@@ -22,5 +22,11 @@ module.exports = {
     },
     app: {
         nodeEnv: process.env.NODE_ENV,
+    },
+    logger: {
+        maxFileSize: process.env.LOGGER_MAX_FILE_SIZE,
+        maxLiveTime: process.env.LOGGER_MAX_LIVE_TIME,
+        datePattern: process.env.LOGGER_DATE_PATTERN,
+        level: process.env.LOGGER_LEVEL,
     }
 };

@@ -1,23 +1,22 @@
 const { v4: uuid } = require('uuid');
 const User = require('@database/v1/user');
 const passport = require('@utils/strategies');
-const logger = require('@utils/logging');
+const Logging = require('@utils/logging');
+const logger = Logging
+    .getInstance()
+    .registerLogger(`api:v1:controllers:user:${require('node:path').basename(__filename)}`);
 
 async function getAllUsers(ctx) {
     try {
-        const start = Date.now();
         const users = await User.find({});
-        const ms = Date.now() - start;
 
         if (!users.length) {
             ctx.body = { users: [] };
         }
 
-        logger.info(`(${ctx.method}) ${ctx.url} - ${ms}ms`);
-
         ctx.body = { users };
     } catch (error) {
-        logger.error('getAllUsers error:', error);
+        logger.error('getAllUsers - caught exception: %s', error);
         ctx.throw(500, 'Internal server error.');
     }  
 }
@@ -39,7 +38,7 @@ async function login (ctx, next) {
             ctx.body = { token };
         })(ctx, next);
     } catch (error) {
-        logger.error('login error:', error);
+        logger.error('login - caught exception: %s', error);
         ctx.throw(500, 'Internal server error.');
     }
 }
@@ -63,7 +62,7 @@ async function createUser(ctx) {
 
         ctx.body = { user };
     } catch (error) {
-        logger.error('createUser error:', error);
+        logger.error('createUser - caught exception: %s', error);
         ctx.throw(500, 'Internal server error.');
     }
 }
