@@ -2,9 +2,9 @@ const { getFile, createFile } = require('./file/fileController');
 const { getAllUsers, createUser, login } = require('./user/userController');
 
 module.exports = {
-    getFile, 
+    getFile,
     createFile,
-    getAllUsers, 
-    createUser, 
+    getAllUsers,
+    createUser,
     login,
 };

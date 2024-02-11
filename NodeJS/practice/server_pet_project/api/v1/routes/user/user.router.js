@@ -9,5 +9,4 @@ router
     .post('/login', login)
     .post('/create', handleMongooseValidationError, createUser);
 
-
 module.exports = router;

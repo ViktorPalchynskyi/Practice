@@ -14,8 +14,8 @@ class Logging {
         this.maxFiles = config.logger.maxLiveTime;
         this.datePattern = config.logger.datePattern;
         this.appMode = config.app.nodeEnv;
-        this.container = new winston.Container(); 
-    };
+        this.container = new winston.Container();
+    }
 
     static getInstance() {
         if (!Logging.instance) {
@@ -33,7 +33,7 @@ class Logging {
                     format.timestamp(),
                     label({ label: this.namespace }),
                     format.splat(),
-                    this.appMode === 'production' ? this.verboseFormat() : this.verboseFormatColor(),
+                    this.appMode === 'production' ? this.verboseFormat() : this.verboseFormatColor()
                 ),
                 level: this.level,
                 transports: this.getTransportsPatterns(),
@@ -41,7 +41,7 @@ class Logging {
 
             return this.container.get(this.namespace);
         } catch (error) {
-            console.error(`Logger error: ${error}`)
+            console.error(`Logger error: ${error}`);
         }
     }
 
@@ -54,12 +54,7 @@ class Logging {
                     zippedArchive: true,
                     maxSize: this.maxSize,
                     maxFiles: this.maxFiles,
-                    format: combine(
-                        format.timestamp(),
-                        label({ label: this.namespace }),
-                        format.splat(),
-                        this.verboseFormat(),
-                    ),
+                    format: combine(format.timestamp(), label({ label: this.namespace }), format.splat(), this.verboseFormat()),
                 }),
                 new transports.DailyRotateFile({
                     filename: 'error.log',
@@ -68,29 +63,19 @@ class Logging {
                     zippedArchive: true,
                     maxSize: this.maxSize,
                     maxFiles: this.maxFiles,
-                    format: combine(
-                        format.timestamp(),
-                        label({ label: this.namespace }),
-                        format.splat(),
-                        this.verboseFormat(),
-                    )
+                    format: combine(format.timestamp(), label({ label: this.namespace }), format.splat(), this.verboseFormat()),
                 }),
             ],
             development: () => [
                 new transports.Console({
                     level: this.level,
-                    format: combine(
-                        format.timestamp(),
-                        label({ label: this.namespace }),
-                        format.splat(),
-                        this.verboseFormatColor(),
-                    ),
-                })
+                    format: combine(format.timestamp(), label({ label: this.namespace }), format.splat(), this.verboseFormatColor()),
+                }),
             ],
         };
-    
+
         return transportsPatterns[this.appMode || 'development']();
-    };
+    }
 
     formatLoggerMessage(data) {
         return `${data.level} [${data.timestamp}] ${data.label} - ${data.message}`;
@@ -98,17 +83,17 @@ class Logging {
 
     verboseFormatColor() {
         return printf((data) => {
-            const coloredData = colorizer.transform(data, { 
-                all: false,  
+            const coloredData = colorizer.transform(data, {
+                all: false,
                 level: true,
                 message: true,
             });
-        
+
             return this.formatLoggerMessage(coloredData);
         });
     }
 
-    verboseFormat () {
+    verboseFormat() {
         return printf((data) => this.formatLoggerMessage(data));
     }
 
@@ -117,16 +102,14 @@ class Logging {
 
         if (level) {
             const standartLevel = level.toLowerCase();
-    
+
             if (standartLevel in winston.config.cli.levels) {
                 return standartLevel;
             }
         }
-    
+
         return defaultLevel;
-    };
+    }
 }
-
-
 
 module.exports = Logging;

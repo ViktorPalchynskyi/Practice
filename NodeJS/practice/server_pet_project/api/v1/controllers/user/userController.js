@@ -2,9 +2,7 @@ const { v4: uuid } = require('uuid');
 const User = require('@database/v1/user');
 const passport = require('@utils/strategies');
 const Logging = require('@utils/logging');
-const logger = Logging
-    .getInstance()
-    .registerLogger(`api:v1:controllers:user:${require('node:path').basename(__filename)}`);
+const logger = Logging.getInstance().registerLogger(`api:v1:controllers:user:${require('node:path').basename(__filename)}`);
 
 async function getAllUsers(ctx) {
     try {
@@ -17,23 +15,22 @@ async function getAllUsers(ctx) {
         ctx.body = { users };
     } catch (error) {
         logger.error('getAllUsers - caught exception: [%s]', error);
-    }  
+    }
 }
 
-async function login (ctx, next) {
+async function login(ctx, next) {
     try {
         await passport.authenticate('local', async (err, user, info) => {
-
             if (err) throw err;
-            
+
             if (!user) {
                 ctx.status = 400;
                 ctx.body = { error: info };
                 return;
             }
-    
+
             const token = uuid();
-    
+
             ctx.body = { token };
         })(ctx, next);
     } catch (error) {

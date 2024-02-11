@@ -33,7 +33,7 @@ async function createFile(ctx) {
         const filePath = getFilePath(addExtentionToFileName(fileName));
 
         if (fs.existsSync(filePath)) {
-            logger.warn('createFile - File already exist: %s', filePath)
+            logger.warn('createFile - File already exist: %s', filePath);
             ctx.throw(409, 'File already exist.');
         }
 
@@ -48,7 +48,7 @@ async function createFile(ctx) {
     }
 }
 
-module.exports = { 
+module.exports = {
     getFile,
     createFile,
- };
+};
