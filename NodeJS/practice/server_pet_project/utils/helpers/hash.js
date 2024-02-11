@@ -22,7 +22,7 @@ function generateSalt() {
         });
     });
 }
-
+s
 module.exports = {
     generatePassword,
     generateSalt,
