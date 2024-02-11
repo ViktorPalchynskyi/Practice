@@ -1,35 +1,34 @@
 const { Schema, model } = require('mongoose');
 const { generateSalt, generatePassword } = require('@utils/helpers');
 
-// TODO: check unique validation for email
 const userSchema = new Schema({
     name: {
-        type: Schema.Types.String,
+        type: String,
         required: true,
     },
     surname: {
-        type: Schema.Types.String,
+        type: String,
         required: true,
     },
     email: {
-        type: Schema.Types.String,
+        type: String,
         required: 'Email should not be empty.',
         validate: [
             {
                 validator(value) {
                     return /^[-.\w]+@([\w-]+\.)+[\w-]{2,12}$/.test(value);
                 },
-                message: 'Invalid email.'
-            }
+                message: 'Invalid email.',
+            },
         ],
-        unique: 'Email allready exist.'
+        unique: 'Email allready exist.',
     },
     password: {
-        type: Schema.Types.String,
+        type: String,
     },
     salt: {
-        type: Schema.Types.String,
-    }
+        type: String,
+    },
 });
 
 userSchema.methods.setPassword = async function setPassword(password) {
@@ -45,7 +44,7 @@ userSchema.methods.checkPassword = async function checkPassword(password) {
     return this.password === hash;
 };
 
-// userSchema.index({ email: 1 });
+userSchema.index({ email: 1 }, { unique: true });
 
 const User = model('User', userSchema);
 
