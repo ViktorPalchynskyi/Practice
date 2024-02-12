@@ -1,9 +1,8 @@
 const fs = require('node:fs');
 const { addExtentionToFileName, getFilePath } = require('@utils/helpers');
 const Logging = require('@utils/logging');
-const logger = Logging
-    .getInstance()
-    .registerLogger(`api:v1:controllers:file:${require('node:path').basename(__filename)}`);
+const { LimitSize } = require('@utils/streams');
+const logger = Logging.getInstance().registerLogger(`api:v1:controllers:file:${require('node:path').basename(__filename)}`);
 
 async function getFile(ctx) {
     try {
@@ -24,6 +23,7 @@ async function getFile(ctx) {
         ctx.body = readStream;
     } catch (error) {
         logger.error('getFile error - caught exception: %s', error);
+        throw error;
     }
 }
 
@@ -33,18 +33,42 @@ async function createFile(ctx) {
         const filePath = getFilePath(addExtentionToFileName(fileName));
 
         if (fs.existsSync(filePath)) {
-            logger.warn('createFile - File already exist: %s', filePath);
-            ctx.throw(409, 'File already exist.');
+            logger.warn('createFile - File already exist: [%s]', filePath);
+            ctx.status = 409;
+            ctx.body = { error: 'File already exist' };
+            return;
         }
 
         const writeStream = fs.createWriteStream(filePath, { flags: 'w' });
+        const limitSizeStream = new LimitSize({ limit: 8 });
 
-        writeStream.write(text);
-        writeStream.end();
+        limitSizeStream.pipe(writeStream);
+        await new Promise((resolve, reject) => {
+            limitSizeStream.write(text, (error) => {
+                if (!error) {
+                    limitSizeStream.end();
+                }
+            });
+            limitSizeStream.on('error', (error) => {
+                logger.error('getFile error - caught exception44: [%s]', error);
+                writeStream.end();
 
-        ctx.body = { message: `File was created.` };
+                fs.unlink(filePath, (err) => {
+                    if (err) {
+                        logger.error('getFile error - caught exception: [%s]', error);
+                    }
+
+                    reject(error);
+                });
+            });
+            limitSizeStream.on('finish', resolve);
+
+            ctx.body = { message: 'File was created.' };
+        });
     } catch (error) {
-        logger.error('getFile error - caught exception: %s', error);
+        logger.error('getFile error - caught exception: [%s]', error);
+        ctx.status = 413;
+        ctx.body = { error: error.message };
     }
 }
 
