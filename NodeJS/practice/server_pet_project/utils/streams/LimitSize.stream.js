@@ -10,7 +10,7 @@ module.exports = class LimitSize extends Transform {
 
     _transform(chunk, encoding, callback) {
         this._byteCapacity += chunk.byteLength;
-
+        
         if (this._byteCapacity > this.limit) {
             callback(new LimitExceededError(this.limit));
         } else {

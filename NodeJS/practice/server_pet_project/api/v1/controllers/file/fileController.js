@@ -1,8 +1,16 @@
 const fs = require('node:fs');
+const util = require('node:util');
+
+const writeFile = util.promisify(fs.writeFile);
+const unlink = util.promisify(fs.unlink);
+
 const { addExtentionToFileName, getFilePath } = require('@utils/helpers');
 const Logging = require('@utils/logging');
 const { LimitSize } = require('@utils/streams');
-const logger = Logging.getInstance().registerLogger(`api:v1:controllers:file:${require('node:path').basename(__filename)}`);
+const { Compression } = require('@utils/streams');
+const logger = Logging
+    .getInstance()
+    .registerLogger(`api:v1:controllers:file:${require('node:path').basename(__filename)}`);
 
 async function getFile(ctx) {
     try {
@@ -28,10 +36,11 @@ async function getFile(ctx) {
 }
 
 async function createFile(ctx) {
-    try {
-        const { fileName, text } = ctx.request.body;
-        const filePath = getFilePath(addExtentionToFileName(fileName));
+    const { fileName, text } = ctx.request.body;
+    const filePath = getFilePath(addExtentionToFileName(fileName));
+    const compressedFilePath = `${filePath}.gz`;
 
+    try {
         if (fs.existsSync(filePath)) {
             logger.warn('createFile - File already exist: [%s]', filePath);
             ctx.status = 409;
@@ -39,27 +48,21 @@ async function createFile(ctx) {
             return;
         }
 
-        const writeStream = fs.createWriteStream(filePath, { flags: 'w' });
-        const limitSizeStream = new LimitSize({ limit: 8 });
+        await writeFile(filePath, text);
+
+        const writeStream = fs.createWriteStream(compressedFilePath, { flags: 'w' });
+        const readStream = fs.createReadStream(filePath);
+        const limitSizeStream = new LimitSize({ limit: 30 });
+        const comprationStream = new Compression();
 
         limitSizeStream.pipe(writeStream);
         await new Promise((resolve, reject) => {
-            limitSizeStream.write(text, (error) => {
-                if (!error) {
-                    limitSizeStream.end();
-                }
-            });
+            readStream.pipe(comprationStream).pipe(limitSizeStream);
             limitSizeStream.on('error', (error) => {
                 logger.error('getFile error - caught exception44: [%s]', error);
                 writeStream.end();
 
-                fs.unlink(filePath, (err) => {
-                    if (err) {
-                        logger.error('getFile error - caught exception: [%s]', error);
-                    }
-
-                    reject(error);
-                });
+                reject(error);
             });
             limitSizeStream.on('finish', resolve);
 
@@ -68,6 +71,8 @@ async function createFile(ctx) {
     } catch (error) {
         logger.error('getFile error - caught exception: [%s]', error);
         ctx.status = 413;
+        unlink(filePath);
+        unlink(compressedFilePath);
         ctx.body = { error: error.message };
     }
 }
