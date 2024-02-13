@@ -73,9 +73,14 @@ class Logging {
                 }),
             ],
             test: () => [
-                new transports.Console({
-                    level: this.level,
-                    format: combine(format.timestamp(), label({ label: this.namespace }), format.splat(), this.verboseFormatColor()),
+                new transports.DailyRotateFile({
+                    filename: 'error.log',
+                    level: 'error',
+                    datePattern: this.datePattern,
+                    zippedArchive: true,
+                    maxSize: this.maxSize,
+                    maxFiles: this.maxFiles,
+                    format: combine(format.timestamp(), label({ label: this.namespace }), format.splat(), this.verboseFormat()),
                 }),
             ],
         };

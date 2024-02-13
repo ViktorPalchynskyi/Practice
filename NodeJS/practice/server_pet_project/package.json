@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "clear && cross-env NODE_ENV=test mocha --require module-alias/register --no-warnings --ignore=node_modules/** **/*.test.js",
+    "test": "clear && cross-env NODE_ENV=test mocha --require module-alias/register --no-warnings --ignore=node_modules/** './tests/**/*.test.js'",
     "debag": "node --inspect server.js",
-    "start": "clear && nodemon server.js"
+    "start": "clear && nodemon --require module-alias/register server.js"
   },
   "author": "",
   "license": "ISC",
@@ -34,6 +34,7 @@
     "@utils": "./utils",
     "@config": "./config/",
     "@database/v1": "./api/v1/models",
-    "@controllers/v1": "./api/v1/controllers"
+    "@controllers/v1": "./api/v1/controllers",
+    "@app": "./app.js"
   }
 }

@@ -1,4 +1,4 @@
-const app = require('../app');
+const app = require('@app');
 const chai = require('chai');
 const axios = require('axios');
 let expect = chai.expect;
@@ -18,11 +18,10 @@ describe('Testing app.js', () => {
         server.close();
     });
 
-    it('Should return 200 OK', async () => {
+    it('should return 200 OK', async () => {
         const res = await request({
             method: 'get',
         });
-        console.log(res.data);
 
         expect(res.status).to.equal(200);
         expect(res.data).to.eql('testing server');

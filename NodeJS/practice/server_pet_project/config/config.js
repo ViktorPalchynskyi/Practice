@@ -5,9 +5,15 @@ dotenv.config({
     path: path.join(__dirname, '../', '.env'),
 });
 
+const uri = {
+    development: process.env.MONGODB_DEVELOP_URI,
+    test: process.env.MONGODB_TEST_URI,
+    production: process.env.MONGODB_PRODUCTION_URI,
+};
+
 module.exports = {
     mongodb: {
-        uri: process.env.NODE_ENV === 'development' ? process.env.MONGODB_DEVELOP_URI : process.env.MONGODB_PRODUCTION_URI,
+        uri: uri[process.env.NODE_ENV],
     },
     server: {
         port: 3000,

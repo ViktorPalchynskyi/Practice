@@ -1,4 +1,3 @@
-require('module-alias/register');
 const { connctDB, config } = require('@config');
 const port = config.server.port;
 const app = require('./app');

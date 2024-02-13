@@ -8,9 +8,7 @@ const { addExtentionToFileName, getFilePath } = require('@utils/helpers');
 const Logging = require('@utils/logging');
 const { LimitSize } = require('@utils/streams');
 const { Compression } = require('@utils/streams');
-const logger = Logging
-    .getInstance()
-    .registerLogger(`api:v1:controllers:file:${require('node:path').basename(__filename)}`);
+const logger = Logging.getInstance().registerLogger(`api:v1:controllers:file:${require('node:path').basename(__filename)}`);
 
 async function getFile(ctx) {
     try {
@@ -18,7 +16,9 @@ async function getFile(ctx) {
         const filePath = getFilePath(addExtentionToFileName(fileName));
 
         if (!fs.existsSync(filePath)) {
-            ctx.throw(409, 'File is not exist.');
+            ctx.status = 409;
+            ctx.body = { error: 'File is not exist.' };
+            return;
         }
 
         const readStream = fs.createReadStream(filePath);
@@ -48,6 +48,7 @@ async function createFile(ctx) {
             return;
         }
 
+        ctx.body = { message: 'File was created.' };
         await writeFile(filePath, text);
 
         const writeStream = fs.createWriteStream(compressedFilePath, { flags: 'w' });
@@ -64,15 +65,15 @@ async function createFile(ctx) {
 
                 reject(error);
             });
-            limitSizeStream.on('finish', resolve);
 
-            ctx.body = { message: 'File was created.' };
+            limitSizeStream.on('finish', resolve);
         });
+
+        unlink(filePath);
+        unlink(compressedFilePath);
     } catch (error) {
         logger.error('getFile error - caught exception: [%s]', error);
         ctx.status = 413;
-        unlink(filePath);
-        unlink(compressedFilePath);
         ctx.body = { error: error.message };
     }
 }
