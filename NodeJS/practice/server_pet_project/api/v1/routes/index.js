@@ -10,5 +10,4 @@ router.get('/', (ctx) => {
 router.use('/users', userRouter.routes());
 router.use('/files', filesRouter.routes());
 
-
 module.exports = router;
