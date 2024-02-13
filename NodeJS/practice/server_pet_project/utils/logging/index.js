@@ -41,7 +41,7 @@ class Logging {
 
             return this.container.get(this.namespace);
         } catch (error) {
-            console.error(`Logger error: ${error}`);
+            console.error(`Logger error: [${error}]`);
         }
     }
 
@@ -67,6 +67,12 @@ class Logging {
                 }),
             ],
             development: () => [
+                new transports.Console({
+                    level: this.level,
+                    format: combine(format.timestamp(), label({ label: this.namespace }), format.splat(), this.verboseFormatColor()),
+                }),
+            ],
+            test: () => [
                 new transports.Console({
                     level: this.level,
                     format: combine(format.timestamp(), label({ label: this.namespace }), format.splat(), this.verboseFormatColor()),
