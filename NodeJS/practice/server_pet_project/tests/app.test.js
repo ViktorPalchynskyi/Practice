@@ -1,11 +1,6 @@
 const app = require('@app');
-const chai = require('chai');
-const axios = require('axios');
-let expect = chai.expect;
-const request = axios.create({
-    baseURL: 'http://localhost:3000/api/v1',
-    validateStatus: () => true,
-});
+const { getTestingTools } = require('@utils/helpers');
+const { expect, request } = getTestingTools();
 
 describe('Testing app.js', () => {
     let server;

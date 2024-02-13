@@ -8,7 +8,9 @@ const { addExtentionToFileName, getFilePath } = require('@utils/helpers');
 const Logging = require('@utils/logging');
 const { LimitSize } = require('@utils/streams');
 const { Compression } = require('@utils/streams');
-const logger = Logging.getInstance().registerLogger(`api:v1:controllers:file:${require('node:path').basename(__filename)}`);
+const logger = Logging
+    .getInstance()
+    .registerLogger(`api:v1:controllers:file:${require('node:path').basename(__filename)}`);
 
 async function getFile(ctx) {
     try {

@@ -1,16 +1,9 @@
 const app = require('@app');
-const { connctDB } = require('@config');
-const { addExtentionToFileName, getFilePath } = require('@utils/helpers');
-const axios = require('axios');
-const chai = require('chai');
+const { addExtentionToFileName, getFilePath, getTestingTools } = require('@utils/helpers');
+const { expect, request } = getTestingTools();
+
 const fs = require('node:fs');
 const util = require('node:util');
-const expect = chai.expect;
-const request = axios.create({
-    responseType: 'json',
-    validateStatus: () => true,
-    baseURL: 'http://localhost:3000/api/v1',
-});
 
 const writeFile = util.promisify(fs.writeFile);
 const unlink = util.promisify(fs.unlink);
