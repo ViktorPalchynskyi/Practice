@@ -20,6 +20,7 @@ async function getAllUsers(ctx) {
     }
 }
 
+// TODO: rename this function
 async function login(ctx, next) {
     try {
         await passport.authenticate('local', async (err, user, info) => {
@@ -27,7 +28,7 @@ async function login(ctx, next) {
 
             if (!user) {
                 ctx.status = 400;
-                ctx.body = { error: info };
+                ctx.body = { error: info.message };
                 return;
             }
 
