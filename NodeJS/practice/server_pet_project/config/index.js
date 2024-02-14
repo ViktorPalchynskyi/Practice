@@ -1,7 +1,8 @@
 const config = require('./config');
-const connctDB = require('./db');
+const { connctDB, disconnectDB } = require('./db');
 
 module.exports = {
     config,
     connctDB,
+    disconnectDB,
 };

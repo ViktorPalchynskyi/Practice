@@ -13,7 +13,7 @@ describe('Testing app.js', () => {
         server.close();
     });
 
-    it('should return 200 OK', async () => {
+    it('must return 200 OK', async () => {
         const res = await request({
             method: 'get',
         });
