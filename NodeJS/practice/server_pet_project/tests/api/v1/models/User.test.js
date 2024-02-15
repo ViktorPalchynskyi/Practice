@@ -1,23 +1,8 @@
 const User = require('@database/v1/user');
-const app = require('@app');
-const { getTestingTools, mapUserDocument } = require('@utils/helpers');
+const { getTestingTools } = require('@utils/helpers');
 const { expect } = getTestingTools();
-const { connctDB, disconnectDB } = require('@config');
 
 describe('Testing User model', () => {
-    // let server;
-
-    // before((done) => {
-    //     server = app.listen(3000, done);
-    //     connctDB();
-    // });
-
-    // after(async () => {
-    //     await User.deleteMany({});
-    //     await disconnectDB();
-    //     server.close();
-    // });
-
     it('must have name field', () => {
         const shema = User.schema.obj;
         const { type, required } = shema.name;
