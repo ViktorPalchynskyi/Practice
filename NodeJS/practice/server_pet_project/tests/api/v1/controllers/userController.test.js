@@ -73,20 +73,37 @@ describe('Testing userController.js', () => {
             });
             const { user } = res.data;
             const mappedUser = mapUserDocument(user);
+            const fields = [
+                {
+                    key: 'id',
+                    type: 'string',
+                },
+                {
+                    key: 'name',
+                    type: 'string',
+                },
+                {
+                    key: 'surname',
+                    type: 'string',
+                },
+                {
+                    key: 'email',
+                    type: 'string',
+                },
+                {
+                    key: 'salt',
+                    type: 'string',
+                },
+                {
+                    key: 'password',
+                    type: 'string',
+                },
+            ];
 
-            expect(mappedUser, 'must have id field').to.have.property('id');
-            expect(mappedUser, 'must have name field').to.have.property('name');
-            expect(mappedUser, 'must have surname field').to.have.property('surname');
-            expect(mappedUser, 'must have email field').to.have.property('email');
-            expect(mappedUser, 'must have salt field').to.have.property('salt');
-            expect(mappedUser, 'must have password field').to.have.property('password');
-
-            expect(mappedUser.id, 'id field must be type of String').to.be.a('string');
-            expect(mappedUser.name, 'name field must be type of String').to.be.a('string');
-            expect(mappedUser.surname, 'surname field must be type of String').to.be.a('string');
-            expect(mappedUser.email, 'email field must be type of String').to.be.a('string');
-            expect(mappedUser.salt, 'salt field must be type of String').to.be.a('string');
-            expect(mappedUser.password, 'password field must be type of String').to.be.a('string');
+            for (const { key, type } of fields) {
+                expect(mappedUser, `must have ${key} field`).to.have.property(key);
+                expect(mappedUser[key], `${key} field must be type of '${type}'`).to.be.a(type);
+            }
         });
 
         it('must return an error if user data isn`t provided', async () => {
