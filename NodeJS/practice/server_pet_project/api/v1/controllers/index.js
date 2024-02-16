@@ -1,5 +1,6 @@
-const { getFile, createFile } = require('./file/fileController');
-const { getAllUsers, createUser, login } = require('./user/userController');
+const { getFile, createFile } = require('./file/file.controller');
+const { getAllUsers, createUser, login } = require('./user/user.controller');
+const { getPost } = require('./post/post.controller');
 
 module.exports = {
     getFile,
@@ -7,4 +8,5 @@ module.exports = {
     getAllUsers,
     createUser,
     login,
+    getPost,
 };

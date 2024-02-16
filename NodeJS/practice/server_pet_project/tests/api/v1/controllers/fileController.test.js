@@ -8,7 +8,7 @@ const util = require('node:util');
 const writeFile = util.promisify(fs.writeFile);
 const unlink = util.promisify(fs.unlink);
 
-describe('Tesing fileController.js', () => {
+describe('Tesing file.controller.js', () => {
     let server;
     const filePath = getFilePath(addExtentionToFileName('mockFile'));
     before((done) => {

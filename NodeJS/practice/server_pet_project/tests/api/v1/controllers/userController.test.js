@@ -4,7 +4,7 @@ const { getTestingTools, mapUserDocument } = require('@utils/helpers');
 const User = require('@database/v1/user');
 const { expect, request } = getTestingTools();
 
-describe('Testing userController.js', () => {
+describe('Testing user.controller.js', () => {
     let server;
 
     before((done) => {
