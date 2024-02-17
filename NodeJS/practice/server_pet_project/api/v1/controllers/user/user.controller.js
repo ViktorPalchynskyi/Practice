@@ -8,6 +8,8 @@ const logger = Logging
 
 async function getAllUsers(ctx) {
     try {
+        // logger.info('getAllUsers ctx - referer: [%s]', ctx.headers.referer);
+        // logger.info('getAllUsers ctx - query: [%s]', ctx.query);
         const users = await User.find({});
 
         if (!users.length) {
