@@ -5,6 +5,9 @@ const request = axios.create({
 });
 const Logging = require('@utils/logging');
 const logger = Logging.getInstance().registerLogger(`api:v1:controllers:posts:${require('node:path').basename(__filename)}`);
+// const { setPostInterseptor } = require('@utils/interceptors');
+
+// setPostInterseptor(request);
 
 async function getPost(ctx) {
     try {
@@ -70,7 +73,7 @@ async function getAllPosts(ctx) {
         // logger.info('getAllPosts ctx - request.ips: %s', ctx.request.ips);
         // logger.warn('getAllPosts ctx - request.subdomains: %s', ctx.request.subdomains);
         // logger.warn('getAllPosts ctx - agent: %s', ctx.get('User-Agent'));
-        
+
         ctx.body = posts;
     } catch (error) {
         logger.error('getAllPosts error - caught exception: %s', error);
@@ -78,7 +81,69 @@ async function getAllPosts(ctx) {
     }
 }
 
+async function createPost(ctx) {
+    try {
+        const data = ctx.request.body;
+        const res = await request.post('/posts', {
+            data,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            transformRequest: [(data, headers) => {
+                console.log('transformRequest ==> data, headers', data, headers);
+            }], 
+            transformResponse: [data => {
+                console.log('transformResponse ==> data', data);
+                data.someThing = 'some';
+                
+                return data;
+            }],
+            adapter: config => {
+                return new Promise((resolve) => {
+                    const some = { to: 'do', la: 'ra', chiki: 'briki' };
+                    
+                    console.log('here', some);
+                    resolve(some);
+                });
+            }
+        });
+        // const res = await axios({
+        //     method: 'post',
+        //     url: 'https://jsonplaceholder.typicode.com/posts',
+        //     data,
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     transformRequest: [(data, headers) => {
+        //         console.log('transformRequest ==> data, headers', data, headers);
+        //     }], 
+        //     transformResponse: [data => {
+        //         console.log('transformResponse ==> data', data);
+                
+        //         return data;
+        //     }],
+        //     adapter: config => {
+        //         return new Promise((resolve) => {
+        //             const some = { to: 'do', la: 'ra', chiki: 'briki' };
+                    
+        //             console.log('here', some);
+        //             resolve(some);
+        //         });
+        //     }
+        // });
+        console.log(res?.data);
+        const post = res?.data?.data;
+        // logger.warn('createPost ctx - response.headerSent: %s', res.state);
+        ctx.response.lastModified = new Date();
+        ctx.body = post;
+    } catch (error) {
+        logger.error('createPost error - caught exception: %s', error);
+        throw error;
+    }
+}
+
 module.exports = {
     getPost,
     getAllPosts,
+    createPost,
 };
