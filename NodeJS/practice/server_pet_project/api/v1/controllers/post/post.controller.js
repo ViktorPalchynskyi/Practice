@@ -5,9 +5,9 @@ const request = axios.create({
 });
 const Logging = require('@utils/logging');
 const logger = Logging.getInstance().registerLogger(`api:v1:controllers:posts:${require('node:path').basename(__filename)}`);
-// const { setPostInterseptor } = require('@utils/interceptors');
+const { setPostInterseptor } = require('@utils/interceptors');
 
-// setPostInterseptor(request);
+setPostInterseptor(request);
 
 async function getPost(ctx) {
     try {

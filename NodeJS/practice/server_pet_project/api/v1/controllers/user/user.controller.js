@@ -2,9 +2,7 @@ const { v4: uuid } = require('uuid');
 const User = require('@database/v1/user');
 const passport = require('@utils/strategies');
 const Logging = require('@utils/logging');
-const logger = Logging
-    .getInstance()
-    .registerLogger(`api:v1:controllers:user:${require('node:path').basename(__filename)}`);
+const logger = Logging.getInstance().registerLogger(`api:v1:controllers:user:${require('node:path').basename(__filename)}`);
 
 async function getAllUsers(ctx) {
     try {
@@ -67,8 +65,23 @@ async function createUser(ctx) {
     }
 }
 
+async function countSurnames(ctx) {
+    try {
+        const users = await User.aggregate([{ $group: { _id: '$surname', total: { $sum: 1 } } }]);
+
+        if (!users.length) {
+            ctx.body = { users: [] };
+        }
+
+        ctx.body = { users };
+    } catch (error) {
+        logger.error('countSurnames - caught exception: [%s]', error);
+    }
+}
+
 module.exports = {
     getAllUsers,
     createUser,
     login,
+    countSurnames,
 };
