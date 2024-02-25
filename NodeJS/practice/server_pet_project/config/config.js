@@ -32,4 +32,14 @@ module.exports = {
         datePattern: process.env.LOGGER_DATE_PATTERN,
         level: process.env.LOGGER_LEVEL,
     },
+    providers: {
+        github: {
+            appId: process.env.GITHUB_APP_ID || 'github_app_id',
+            appSecret: process.env.GITHUB_APP_SECRET || 'github_app_secret',
+            callbackURI: 'http://localhost:3000/api/v1/oauth/oauth_callback/github',
+            options: {
+                scope: ['user:email'],
+            },
+        },
+    },
 };

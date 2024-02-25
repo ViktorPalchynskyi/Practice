@@ -2,7 +2,9 @@ const { v4: uuid } = require('uuid');
 const User = require('@database/v1/user');
 const passport = require('@utils/strategies');
 const Logging = require('@utils/logging');
-const logger = Logging.getInstance().registerLogger(`api:v1:controllers:user:${require('node:path').basename(__filename)}`);
+const logger = Logging
+    .getInstance()
+    .registerLogger(`api:v1:controllers:user:${require('node:path').basename(__filename)}`);
 
 async function getAllUsers(ctx) {
     try {

@@ -1,6 +1,7 @@
 const { getFile, createFile } = require('./file/file.controller');
 const { getAllUsers, createUser, login, countSurnames } = require('./user/user.controller');
 const { getPost, getAllPosts, createPost } = require('./post/post.controller');
+const { oauth, oauthCallback } = require('./oauth/oauth.controller');
 
 module.exports = {
     getFile,
@@ -12,4 +13,6 @@ module.exports = {
     getAllPosts,
     createPost,
     countSurnames,
+    oauth,
+    oauthCallback,
 };

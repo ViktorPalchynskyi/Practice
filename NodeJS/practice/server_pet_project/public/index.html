@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Server pet project</title>
+    </head>
+    <body>
+        <button class="github">Github oauth</button>
+    </body>
+    <script type="module">
+        const githubBnt = document.querySelector('.github');
+
+        githubBnt.addEventListener('click', async () => {
+            const res = await fetch('http://localhost:3000/api/v1/oauth/github');
+            res.json().then((res) => {
+                window.location.href = res.location;
+            });
+        });
+    </script>
+</html>
