@@ -46,6 +46,4 @@ userSchema.methods.checkPassword = async function checkPassword(password) {
 
 userSchema.index({ email: 1 }, { unique: true });
 
-const User = model('User', userSchema);
-
-module.exports = User;
+module.exports = model('User', userSchema);

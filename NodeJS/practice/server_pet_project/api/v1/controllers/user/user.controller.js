@@ -1,15 +1,10 @@
-const { v4: uuid } = require('uuid');
-const User = require('@database/v1/user');
+const { User } = require('@database/v1');
 const passport = require('@utils/strategies');
 const Logging = require('@utils/logging');
-const logger = Logging
-    .getInstance()
-    .registerLogger(`api:v1:controllers:user:${require('node:path').basename(__filename)}`);
+const logger = Logging.getInstance().registerLogger(`api:v1:controllers:user:${require('node:path').basename(__filename)}`);
 
 async function getAllUsers(ctx) {
     try {
-        // logger.info('getAllUsers ctx - referer: [%s]', ctx.headers.referer);
-        // logger.info('getAllUsers ctx - query: [%s]', ctx.query);
         const users = await User.find({});
 
         if (!users.length) {
@@ -21,25 +16,31 @@ async function getAllUsers(ctx) {
         logger.error('getAllUsers - caught exception: [%s]', error);
     }
 }
-
 // TODO: rename this function
 async function login(ctx, next) {
     try {
-        await passport.authenticate('local', async (err, user, info) => {
-            if (err) throw err;
+        const authResult = await new Promise((resolve, reject) => {
+            passport.authenticate('local', async (err, user, info) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve({ user, info });
+                }
+            })(ctx, next);
+        });
 
-            if (!user) {
-                ctx.status = 400;
-                ctx.body = { error: info.message };
-                return;
-            }
+        if (!authResult.user) {
+            ctx.status = 400;
+            ctx.body = { error: authResult.info.message };
+            return;
+        }
+        
+        const token = await ctx.login(authResult.user);
 
-            const token = uuid();
-
-            ctx.body = { token };
-        })(ctx, next);
+        ctx.body = { token };
     } catch (error) {
         logger.error('login - caught exception: [%s]', error);
+        throw error;
     }
 }
 
@@ -59,8 +60,9 @@ async function createUser(ctx) {
 
         await user.setPassword(password);
         await user.save();
+        const token = await ctx.login(user);
 
-        ctx.body = { user };
+        ctx.body = { token };
     } catch (error) {
         logger.error('createUser - caught exception: [%s]', error);
         throw error;
@@ -81,9 +83,24 @@ async function countSurnames(ctx) {
     }
 }
 
+async function me(ctx) {
+    if (!ctx.user) {
+        ctx.status = 403;
+        ctx.body = { error: 'No user authenicated.' };
+        return;
+    }
+
+    ctx.body = {
+        email: ctx.user.email,
+        name: ctx.user.name,
+        surname: ctx.user.surname,
+    };
+}
+
 module.exports = {
     getAllUsers,
     createUser,
     login,
     countSurnames,
+    me,
 };

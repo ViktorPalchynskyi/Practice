@@ -1,5 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('@database/v1/user');
+const { User } = require('@database/v1');
 
 module.exports = new LocalStrategy({ usernameField: 'email', session: false }, async (email, password, done) => {
     const user = await User.findOne({ email });

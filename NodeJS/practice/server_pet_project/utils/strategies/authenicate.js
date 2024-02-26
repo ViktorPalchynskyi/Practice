@@ -1,4 +1,4 @@
-const User = require('@database/v1/user');
+const { User } = require('@database/v1');
 const Logging = require('@utils/logging');
 const logger = Logging
     .getInstance()
