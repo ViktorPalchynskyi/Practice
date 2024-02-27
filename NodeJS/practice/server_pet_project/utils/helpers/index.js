@@ -3,6 +3,7 @@ const getFilePath = require('./getFilePath');
 const { generatePassword, generateSalt } = require('./hash');
 const getTestingTools = require('./getTestingTools');
 const mapUserDocument = require('./mapUserDocument');
+const getPugTemplate = require('./getPugTemplate');
 
 module.exports = {
     addExtentionToFileName,
@@ -11,4 +12,5 @@ module.exports = {
     generateSalt,
     getTestingTools,
     mapUserDocument,
+    getPugTemplate,
 };

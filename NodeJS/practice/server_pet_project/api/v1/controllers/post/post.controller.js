@@ -11,9 +11,6 @@ setPostInterseptor(request);
 
 async function getPost(ctx) {
     try {
-        logger.info('getPost ctx - state: %s', ctx.state);
-        logger.info('getPost ctx - ip: %s', ctx.ip);
-        logger.info('getPost ctx - is: %s', ctx.is('json', 'urlencoded'));
         const { name, surname } = ctx.state;
         const { id } = ctx.params;
         const res = await request({

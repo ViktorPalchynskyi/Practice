@@ -2,6 +2,7 @@ const { getFile, createFile } = require('./file/file.controller');
 const { getAllUsers, createUser, login, countSurnames, me } = require('./user/user.controller');
 const { getPost, getAllPosts, createPost } = require('./post/post.controller');
 const { oauth, oauthCallback } = require('./oauth/oauth.controller');
+const { register, confirm } = require('./email/email.controller');
 
 module.exports = {
     getFile,
@@ -16,4 +17,6 @@ module.exports = {
     oauth,
     oauthCallback,
     me,
+    register,
+    confirm,
 };

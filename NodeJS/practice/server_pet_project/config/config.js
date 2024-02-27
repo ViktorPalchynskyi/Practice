@@ -42,4 +42,8 @@ module.exports = {
             },
         },
     },
+    mailer: {
+        user: 'palchinskij19@gmail.com',
+        password: 'sasi hbzc wjcs qkdk',
+    }
 };
