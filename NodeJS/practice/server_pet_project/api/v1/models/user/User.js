@@ -10,6 +10,9 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    verificationToken: {
+        type: String,
+    },
     email: {
         type: String,
         required: 'Email should not be empty.',

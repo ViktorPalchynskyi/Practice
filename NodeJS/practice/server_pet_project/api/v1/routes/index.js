@@ -5,8 +5,8 @@ const userRouter = require('./user/user.router');
 const filesRouter = require('./file/file.router');
 const postsRouter = require('./post/post.router');
 const oauthRouter = require('./oauth/oauth.router');
-const emailRouter = require('./email/email.router');
-
+const registrationRouter = require('./registration/registration.router');
+const ordersRouter = require('./order/order.router');
 
 const router = new Router({ prefix: '/api/v1' });
 
@@ -19,6 +19,7 @@ router.use('/users', userRouter.routes());
 router.use('/files', filesRouter.routes());
 router.use('/posts', postsRouter.routes());
 router.use('/oauth', oauthRouter.routes());
-router.use('/email', emailRouter.routes());
+router.use('/registration', registrationRouter.routes());
+router.use('/orders', ordersRouter.routes());
 
 module.exports = router;

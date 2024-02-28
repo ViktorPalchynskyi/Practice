@@ -1,11 +1,11 @@
 const { v4: uuid } = require('uuid');
 
 const { sendMail } = require('@utils/email');
-const Logging = require('@utils/logging');
 const { User } = require('@database/v1');
+const Logging = require('@utils/logging');
 const logger = Logging
     .getInstance()
-    .registerLogger(`api:v1:controllers:email:${require('node:path').basename(__filename)}`);
+    .registerLogger(`api:v1:registration:email:${require('node:path').basename(__filename)}`);
 
 async function register(ctx) {
     try {
@@ -38,7 +38,7 @@ async function confirm(ctx) {
     try {
         const { verificationToken } = ctx.params;
         const user = await User.findOne({ verificationToken });
-
+        logger.error('confirm - verificationToken: [%s]', { verificationToken, user });
         if (!user) {
             ctx.status = 400;
             ctx.body = 'Confirmation link is expired or invalid.';
@@ -46,7 +46,7 @@ async function confirm(ctx) {
 
         await User.updateOne({ verificationToken }, { $unset: { verificationToken: '' } });
 
-        const token = uuid();
+        const token = await ctx.login(user);
 
         ctx.body = { token };
     } catch (error) {
