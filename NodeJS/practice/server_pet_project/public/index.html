@@ -3,14 +3,56 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="/socket.io/socket.io.js"></script>
         <title>Server pet project</title>
     </head>
     <body>
         <button class="github">Github oauth</button>
+
+        <form name="publish">
+            <input type="text" name="message" />
+            <input type="submit" value="Отправить" />
+        </form>
+        <div id="messages">
+            <p>Messages start here</p>
+        </div>
     </body>
     <script type="module">
         const githubBnt = document.querySelector('.github');
+        function getCookie(name) {
+            let cookies = document.cookie.split(';');
+            console.log('cookies', cookies);
+            console.log('document.cookie', document);
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim();
+                if (cookie.startsWith(name + '=')) {
+                    return cookie.substring(name.length + 1);
+                }
+            }
+            return null;
+        }
 
+        const token = getCookie('token');
+        const socket = io({
+            query: {
+                token,
+            },
+        });
+
+        document.forms.publish.onsubmit = function () {
+            const outgoingMessage = this.message.value;
+            socket.emit('message', outgoingMessage);
+
+            return false;
+        };
+        socket.on('message', (message) => {
+            const { user, text } = message;
+            let messageElem = document.createElement('div');
+            messageElem.innerHTML = `
+                <b>${user}</b> sended message: ${text}            
+            `;
+            document.getElementById('messages').prepend(messageElem);
+        });
         githubBnt.addEventListener('click', async () => {
             const res = await fetch('http://localhost:3000/api/v1/oauth/github');
             res.json().then((res) => {
