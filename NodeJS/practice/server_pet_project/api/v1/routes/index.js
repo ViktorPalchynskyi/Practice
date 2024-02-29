@@ -7,6 +7,7 @@ const postsRouter = require('./post/post.router');
 const oauthRouter = require('./oauth/oauth.router');
 const registrationRouter = require('./registration/registration.router');
 const ordersRouter = require('./order/order.router');
+const messageRouter = require('./message/message.router');
 
 const router = new Router({ prefix: '/api/v1' });
 
@@ -21,5 +22,6 @@ router.use('/posts', postsRouter.routes());
 router.use('/oauth', oauthRouter.routes());
 router.use('/registration', registrationRouter.routes());
 router.use('/orders', ordersRouter.routes());
+router.use('/messages', messageRouter.routes());
 
 module.exports = router;

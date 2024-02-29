@@ -4,6 +4,7 @@ const { getPost, getAllPosts, createPost } = require('./post/post.controller');
 const { oauth, oauthCallback } = require('./oauth/oauth.controller');
 const { register, confirm } = require('./registration/registration.controller');
 const { createProducts, getOrdersList, checkout } = require('./order/order.controller');
+const { messageList } = require('./message/message.controller')
 
 module.exports = {
     getFile,
@@ -23,4 +24,5 @@ module.exports = {
     createProducts,
     getOrdersList,
     checkout,
+    messageList,
 };
