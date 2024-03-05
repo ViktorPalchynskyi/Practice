@@ -116,14 +116,22 @@ fs.readlink(symlinkPath, (err, linkString) => {
     console.log(`Link lead to ${linkString}`);
 });
 
-fs.lstat(symlinkPath, (err, stats) => {
-    if (err) {
-        console.error(err);
-    }
+// fs.lstat(symlinkPath, (err, stats) => {
+//     if (err) {
+//         console.error(err);
+//     }
 
-    if(stats.isSymbolicLink()) {
-        console.log('This is a symbolyc link');
-    } else {
-        console.log(`File with attr: ${JSON.stringify(stats)}`);
-    }
-});
+//     if(stats.isSymbolicLink()) {
+//         console.log('This is a symbolyc link');
+//     } else {
+//         console.log(`File with attr: ${JSON.stringify(stats)}`);
+//     }
+// });
+
+// const target = './original.txt'; // Путь к оригинальному файлу
+// const path = './link.txt'; // Путь, где будет создана символическая ссылка
+
+fs.symlink(symlinkPath, filePath, 'file', (err) => {
+    if (err) throw err;
+    console.log(`Символическая ссылка '${path}' на файл '${target}' создана`);
+  });
