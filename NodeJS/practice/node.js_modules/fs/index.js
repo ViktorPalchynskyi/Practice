@@ -4,6 +4,7 @@ const path = require('node:path');
 const content = 'Some text jsjsjsjsj';
 const filePath = `${path.join(__dirname)}/file.txt`;
 const dirPath = `${path.join(__dirname)}/newDir`;
+const symlinkPath = `${path.join(__dirname)}/linkra`;
 
 const readStream = fs.createReadStream(filePath, 'utf-8');
 
@@ -79,14 +80,16 @@ fs.readdir(dirPath, (err, files) => {
     }
 
     // console.log(`Dir files`, files[0]);
-
-    fs.rmdir(dirPath, { recursive: true },  (err) => {
-        if (err) {
-            console.error(err);
-        }
-
-        // console.log('Dir was removed');
-    });
+    // fs.access(dirPath, fs.constants.F_OK, (err) => {
+    //     if (!err) {
+    //         fs.rm(dirPath, { recursive: true }, (err) => {
+    //             if (err) {
+    //                 console.error(err);
+    //             }
+    //             // console.log('Dir was removed');
+    //         });
+    //     }
+    // });
 });
 
 fs.stat(filePath, (err, stats) => {
@@ -94,5 +97,33 @@ fs.stat(filePath, (err, stats) => {
         console.error(err);
     }
 
-    console.log(`File attr: ${stats}`);
+    console.log(`File attr: ${JSON.stringify(stats)}`);
+});
+
+fs.symlink(dirPath, symlinkPath, (err) => {
+    if (err) {
+        console.error(err);
+    }
+
+    console.log('Symlink was created.');
+});
+
+fs.readlink(symlinkPath, (err, linkString) => {
+    if (err) {
+        console.error(err);
+    }
+
+    console.log(`Link lead to ${linkString}`);
+});
+
+fs.lstat(symlinkPath, (err, stats) => {
+    if (err) {
+        console.error(err);
+    }
+
+    if(stats.isSymbolicLink()) {
+        console.log('This is a symbolyc link');
+    } else {
+        console.log(`File with attr: ${JSON.stringify(stats)}`);
+    }
 });
