@@ -1,7 +1,7 @@
 import { Rating } from '@/app/components/Rating/Rating.jsx'
 import { UserContainer } from '@/app/containers/User/User';
 
-export const Review = ({ review }) => {
+export const Review = ({ review, className }) => {
   if (!review) {
     return null;
   }  
@@ -9,7 +9,7 @@ export const Review = ({ review }) => {
   const { rating, text, userId } = review; 
 
   return (
-    <div>
+    <div className={className}>
         <Rating value={rating}/>
         <p>{`Message: ${text}`}</p>
         <UserContainer userId={userId}/>

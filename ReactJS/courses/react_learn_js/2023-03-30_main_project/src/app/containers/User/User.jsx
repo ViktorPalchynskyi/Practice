@@ -6,5 +6,9 @@ import { useSelector } from 'react-redux';
 export const UserContainer = ({ userId }) => {
     const user = useSelector((state) => selectUserById(state, { userId }));
 
-    return <User user={user}/>;
+    if (!user) {
+        return null;
+    }
+
+    return <User user={user} />;
 };

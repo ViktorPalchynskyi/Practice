@@ -1,20 +1,20 @@
 import { ReviewContainer } from '@/app/containers/Review/Review';
 
-export const Reviews = ({ reviews }) => {
-    if (!reviews) {
+import styles from './styles.module.scss';
+
+export const Reviews = ({ reviewId }) => {
+    if (!reviewId?.length) {
         return null;
     }
 
     return (
         <div>
             <h3>Review</h3>
-            <ul>
-                {reviews.map((reviewId) => (
-                    <li key={reviewId}>
-                        <ReviewContainer reviewId={reviewId} />
-                    </li>
+            <div>
+                {reviewId.map((reviewId) => (
+                    <ReviewContainer key={reviewId} reviewId={reviewId} className={styles.review} />
                 ))}
-            </ul>
+            </div>
         </div>
     );
 };

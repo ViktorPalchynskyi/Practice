@@ -1,10 +1,10 @@
 import React from 'react';
 import { DishContainer } from '@/app/containers/Dish/Dish';
 
-export const Cart = ({ cartState }) => {
+export const Cart = ({ cart }) => {
     return (
         <ul>
-            {Object.entries(cartState).map(([id]) => (
+            {Object.entries(cart).map(([id]) => (
                 <li key={id}>
                     <DishContainer dishId={id} />
                 </li>

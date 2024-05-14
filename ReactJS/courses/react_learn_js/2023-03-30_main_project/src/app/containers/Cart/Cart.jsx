@@ -4,7 +4,11 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 export const CartContainer = () => {
-    const cartState = useSelector(selectCartModule);
+    const cart = useSelector(selectCartModule);
 
-    return <Cart cartState={cartState} />;
+    if (!Object.keys(cart || {}).length) {
+        return null;
+    }
+
+    return <Cart cart={cart} />;
 };
