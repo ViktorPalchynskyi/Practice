@@ -1,20 +1,20 @@
-import { Review } from "../Review/Review";
+import { ReviewContainer } from '@/app/containers/Review/Review';
 
-export const Reviews = ({ reviews }) => { 
-  if (!reviews) {
-    return null;
-  }  
+export const Reviews = ({ reviews }) => {
+    if (!reviews) {
+        return null;
+    }
 
-  return (
-    <div>
-        <h3>Review</h3>
-        <ul>
-            {reviews.map(review => (
-              <li key={review?.id}>
-                <Review review={review}/>
-              </li>
-            ))}
-        </ul>
-    </div>
-  );
+    return (
+        <div>
+            <h3>Review</h3>
+            <ul>
+                {reviews.map((reviewId) => (
+                    <li key={reviewId}>
+                        <ReviewContainer reviewId={reviewId} />
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 };

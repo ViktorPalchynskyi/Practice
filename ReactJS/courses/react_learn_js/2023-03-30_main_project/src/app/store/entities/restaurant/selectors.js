@@ -9,4 +9,4 @@ export const selectRestaurants = (state) =>
     Object.values(selectRestaurantModule(state).entities);
 
 export const selectMenuByRestorantId = (state, { restaurantId }) => 
-    selectRestaurantById(state, { restaurantId })?.menu ;
+    selectRestaurantById(state, { restaurantId })?.menu;

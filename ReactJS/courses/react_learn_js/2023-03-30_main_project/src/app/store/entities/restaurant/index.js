@@ -9,7 +9,4 @@ const initialState = {
     ids: normalizedRestaurants.map(({ id }) => id),
 }
 
-export const restaurantReducer = (state = initialState, action) => {
-
-    return state;
-};
+export const restaurantReducer = (state = initialState, action) => state;

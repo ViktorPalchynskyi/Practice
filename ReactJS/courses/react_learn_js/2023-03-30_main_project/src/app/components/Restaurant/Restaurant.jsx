@@ -6,7 +6,7 @@ import { Reviews } from "../Reviews/Reviews";
 import { RestaurantMenuContainer } from "@/app/containers/RestautantMenu/RestaurantMenu";
 
 export const Restaurant = ({ restaurant }) => {
-  const { name, id } = restaurant || {};
+  const { name, id, reviews } = restaurant || {};
   // const rating = useMemo(
   //   () => 
   //     !!reviews?.length 
@@ -21,7 +21,7 @@ export const Restaurant = ({ restaurant }) => {
         <h2>{name}</h2>
         {/* <Rating value={rating}/> */}
         <RestaurantMenuContainer restaurantId={id}/>
-        {/* <Reviews reviews={reviews}/> */}
+        <Reviews reviews={reviews}/>
         <NewReviewFrom/>
     </div>
   );
