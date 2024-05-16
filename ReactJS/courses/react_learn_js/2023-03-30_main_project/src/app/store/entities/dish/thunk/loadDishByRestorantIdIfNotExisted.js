@@ -5,8 +5,7 @@ import { selectDishIds } from '../selector';
 export const loadDishByRestorantIdIfNotExisted = (restaurantId) => (dispatch, getState) => {
     const restaurantMenu = selectMenuByRestorantId(getState(), { restaurantId });
     const dishIds = selectDishIds(getState());
-    console.log('menu', restaurantMenu,);
-    console.log('dishes', dishIds);
+
     if (restaurantMenu.every((dishId) => dishIds.includes(dishId))) {
         return;
     }

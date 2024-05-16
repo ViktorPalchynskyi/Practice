@@ -1,5 +1,5 @@
 import { LOADING_STATUS } from '@/app/constants/loading-status';
-import { RESTAURANT_ACTIONS } from './actions';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     entities: [],
@@ -7,30 +7,27 @@ const initialState = {
     loadingStatus: LOADING_STATUS.idle,
 };
 
-export const restaurantReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case RESTAURANT_ACTIONS.startLoading:
-            return {
-                ...state,
-                loadingStatus: LOADING_STATUS.inProgress,
-            };
-        case RESTAURANT_ACTIONS.finishLoading:
-            return {
-                entities: action.payload.reduce((acc, restaurant) => {
+export const restaurantSlice = createSlice({
+    name: 'restaurant',
+    initialState,
+    reducers: {
+        startLoading: (state) => {
+            state.loadingStatus = LOADING_STATUS.inProgress;
+        },
+        finishLoading: (state, { payload }) => {
+            state.loadingStatus = LOADING_STATUS.finished;
+            state.entities = {
+                ...state.entities,
+                ...payload.reduce((acc, restaurant) => {
                     acc[restaurant.id] = restaurant;
 
                     return acc;
                 }, {}),
-                ids: action.payload.map(({ id }) => id),
-                loadingStatus: LOADING_STATUS.finished,
             };
-        case RESTAURANT_ACTIONS.failLoading:
-            return {
-                ...state,
-                loadingStatus: LOADING_STATUS.failed,
-            };
-
-        default:
-            return state;
-    }
-};
+            state.ids = Array.from(new Set([...state.ids, ...payload.map(({ id }) => id)]));
+        },
+        failLoading: (state) => {
+            state.loadingStatus = LOADING_STATUS.failed;
+        },
+    },
+});

@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux';
-import { cardReducer } from './ui/card';
-import { restaurantReducer } from './entities/restaurant';
+import { cardSlice } from './ui/card';
+import { restaurantSlice } from './entities/restaurant';
 import { dishSlice } from './entities/dish';
-import { userReducer } from './entities/user';
-import { reviewReducer } from './entities/review/inedex';
+import { userSlice } from './entities/user';
+import { reviewSlice } from './entities/review';
 import { configureStore } from '@reduxjs/toolkit';
 import { logger } from './middlewares/logger';
 
 const rootReducer = combineReducers({
-    cart: cardReducer,
-    restaurant: restaurantReducer,
+    cart: cardSlice.reducer,
+    restaurant: restaurantSlice.reducer,
     dish: dishSlice.reducer,
-    user: userReducer,
-    review: reviewReducer,
+    user: userSlice.reducer,
+    review: reviewSlice.reducer,
 });
 
 export const store = configureStore({
