@@ -16,14 +16,11 @@ export const restaurantSlice = createSlice({
         },
         finishLoading: (state, { payload }) => {
             state.loadingStatus = LOADING_STATUS.finished;
-            state.entities = {
-                ...state.entities,
-                ...payload.reduce((acc, restaurant) => {
-                    acc[restaurant.id] = restaurant;
+            state.entities = payload.reduce((acc, dish) => {
+                acc[dish.id] = dish;
 
-                    return acc;
-                }, {}),
-            };
+                return acc;
+            }, {})
             state.ids = Array.from(new Set([...state.ids, ...payload.map(({ id }) => id)]));
         },
         failLoading: (state) => {

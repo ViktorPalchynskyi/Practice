@@ -1,10 +1,8 @@
 import { userSlice } from '..';
-import { selectUserModule } from '../selector';
+import { selectUserIds } from '../selector';
 
 export const loadUserIfNotExisted = () => (dispatch, getState) => {
-    const userIds = selectUserModule(getState());
-
-    if (userIds.length) {
+    if (selectUserIds(getState()).length) {
         return;
     }
 
