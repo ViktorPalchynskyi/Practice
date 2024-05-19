@@ -1,12 +1,24 @@
 .root {
     background-color: black;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     color: white;
     padding: 10px 15px;
+}
 
-    // background-image: url('/images/logo.png');
-    // background-position: center;
-    // background-repeat: no-repeat;
-    // background-size: contain;
+.links {
+}
+
+.link {
+    &:not(:last-child) {
+        margin-right: 10px;
+    }
+     
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.2s;
+
+    &:hover {
+        opacity: 0.8;
+    }
 }

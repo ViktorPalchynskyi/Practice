@@ -1,6 +1,6 @@
 import { Menu } from '@/app/components/Menu/Menu';
 import { selectIsDishLoading } from '@/app/store/entities/dish/selector';
-import { loadDishByRestorantIdIfNotExisted } from '@/app/store/entities/dish/thunk/loadDishByRestorantIdIfNotExisted';
+import { fetchDishByRestaurantId } from '@/app/store/entities/dish/thunk/loadDishByRestorantIdIfNotExisted';
 import { selectMenuByRestorantId } from '@/app/store/entities/restaurant/selectors';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,7 +11,7 @@ export const RestaurantMenuContainer = ({ restaurantId }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(loadDishByRestorantIdIfNotExisted(restaurantId));
+        dispatch(fetchDishByRestaurantId(restaurantId));
     }, [restaurantId, dispatch]);
 
     if (!menu?.length) {
