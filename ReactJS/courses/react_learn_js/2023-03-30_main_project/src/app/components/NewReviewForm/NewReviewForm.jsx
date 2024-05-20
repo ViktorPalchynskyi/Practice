@@ -20,7 +20,7 @@ const reducer = (state, action) => {
     }
 };
 
-export const NewReviewFrom = () => {
+export const NewReviewForm = () => {
   const [formValue, dispatch] = useReducer(reducer, initialState);
 
   return (

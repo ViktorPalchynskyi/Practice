@@ -1,34 +1,26 @@
 import { LOADING_STATUS } from '@/app/constants/loading-status';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
+import { loadReviewIfNotExisted } from './thunks/loadReviewIfNotExisted';
 
-const initialState = {
-    entities: {},
-    ids: [],
+const reviewEntityAdapter = createEntityAdapter();
+const initialState = reviewEntityAdapter.getInitialState({
     loadingStatus: LOADING_STATUS.idle,
-};
+});
 
 export const reviewSlice = createSlice({
     name: 'review',
     initialState,
-    reducers: {
-        startLoading: (state) => {
-            state.loadingStatus = LOADING_STATUS.inProgress;
-        },
-        finishLoading: (state, { payload }) => {
-            state.loadingStatus = LOADING_STATUS.finished;
-            state.entities = {
-                ...state.entities,
-                ...payload.reduce((acc, review) => {
-                    acc[review.id] = review;
-
-                    return acc;
-                }, {}),
-            };
-            state.ids = Array.from(new Set([...state.ids, ...payload.map(({ id }) => id)]));
-        },
-        failLoading: (state) => {
-            state.loadingStatus = LOADING_STATUS.failed;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadReviewIfNotExisted.pending, (state) => {
+                state.loadingStatus = LOADING_STATUS.inProgress;
+            })
+            .addCase(loadReviewIfNotExisted.fulfilled, (state, { payload }) => {
+                state.loadingStatus = LOADING_STATUS.finished;
+                reviewEntityAdapter.setMany(state, payload);
+            })
+            .addCase(loadReviewIfNotExisted.rejected, (state, { payload }) => {
+                state.loadingStatus = payload === LOADING_STATUS.earlyAdded ? LOADING_STATUS.finished : LOADING_STATUS.failed;
+            });
     },
 });
-

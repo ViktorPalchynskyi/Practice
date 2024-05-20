@@ -22,6 +22,6 @@ export const RestaurantReviewContainer = ({ restaurantId }) => {
     if (isLoading) {
         return <span>Loading...</span>
     }
-
+    console.log('reviewID', reviewId);
     return <Reviews reviewId={reviewId} />;
 };

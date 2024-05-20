@@ -1,19 +1,25 @@
 import { useRef } from 'react';
-import { NewReviewFrom } from '../NewReviewForm/NewReviewFrom';
-import { RestaurantMenuContainer } from '@/app/containers/RestautantMenu/RestaurantMenu';
-import { RestaurantReviewContainer } from '@/app/containers/RestaurantReview/RestaurantReview';
+import Link from 'next/link';
+import styles from './styles.module.scss';
 
 export const Restaurant = ({ restaurant }) => {
     const { name, id } = restaurant || {};
 
     const ref = useRef();
+    const menuLink = `/restaurants/${id}/menu`;
+    const reviewLink = `/restaurants/${id}/review`;
 
     return (
         <div ref={ref} key={id}>
             <h2>{name}</h2>
-            <RestaurantMenuContainer restaurantId={id} />
-            <RestaurantReviewContainer restaurantId={id} />
-            <NewReviewFrom />
+            <div className={styles.links}>
+                <Link className={styles.link} href={menuLink}>
+                    Menu
+                </Link>
+                <Link className={styles.link} href={reviewLink}>
+                    Reviews
+                </Link>
+            </div>
         </div>
     );
 };

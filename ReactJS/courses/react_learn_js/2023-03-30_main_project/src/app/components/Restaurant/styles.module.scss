@@ -1,0 +1,17 @@
+.link {
+    &:not(:last-child) {
+        margin-top: 10px;
+    }
+     
+    text-decoration: none;
+    transition: opacity 0.2s;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+}

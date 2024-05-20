@@ -1,15 +1,13 @@
-import { userSlice } from '..';
+import { LOADING_STATUS } from '@/app/constants/loading-status';
 import { selectUserIds } from '../selector';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const loadUserIfNotExisted = () => (dispatch, getState) => {
+export const loadUserIfNotExisted = createAsyncThunk('user/loadUserIfNotExisted', async (_, { getState, rejectedValue }) => {
     if (selectUserIds(getState()).length) {
-        return;
+        return rejectedValue(LOADING_STATUS.earlyAdded);
     }
 
-    dispatch(userSlice.actions.startLoading);
-
-    fetch('http://localhost:3001/api/users')
-        .then((res) => res.json())
-        .then((reviews) => dispatch(userSlice.actions.finishLoading(reviews)))
-        .catch((err) => dispatch(userSlice.actions.failLoading()));
-};
+    const res = await fetch('http://localhost:3001/api/users');
+    
+    return await res.json();
+});

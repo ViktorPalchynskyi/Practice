@@ -6,9 +6,5 @@ import { useSelector } from 'react-redux';
 export const CartContainer = () => {
     const cart = useSelector(selectCartModule);
 
-    if (!Object.keys(cart || {}).length) {
-        return null;
-    }
-
     return <Cart cart={cart} />;
 };

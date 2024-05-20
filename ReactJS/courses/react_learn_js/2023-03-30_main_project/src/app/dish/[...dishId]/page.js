@@ -7,7 +7,6 @@ export default function DishPage() {
     const searchParam = useSearchParams();
     const params = useParams();
 
-    console.log(params, searchParam.get('search'));
     return (
         <div>
             <input
