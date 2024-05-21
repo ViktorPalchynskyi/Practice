@@ -18,7 +18,7 @@ export const restaurantSlice = createSlice({
             })
             .addCase(loadRestaurantIfNotExisted.fulfilled, (state, { payload }) => {
                 state.loadingStatus = LOADING_STATUS.finished;
-                restaurantEntityAdapter.setMany(state, payload);
+                restaurantEntityAdapter.setAll(state, payload);
             })
             .addCase(loadRestaurantIfNotExisted.rejected, (state, { payload }) => {
                 state.loadingStatus = payload === LOADING_STATUS.earlyAdded ? LOADING_STATUS.finished : LOADING_STATUS.failed;

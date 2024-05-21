@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 
 export const Reviews = ({ reviewId }) => {
     if (!reviewId?.length) {
-        return null;
+        return <div>No review</div>;
     }
 
     return (

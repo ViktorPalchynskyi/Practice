@@ -1,13 +1,13 @@
 import { LOADING_STATUS } from '@/app/constants/loading-status';
-import { selectReviewsByRestorantId } from '../../restaurant/selectors';
+import { selectRestaurantById } from '../../restaurant/selectors';
 import { selectReviewIds } from '../selector';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const loadReviewIfNotExisted = createAsyncThunk('review/loadReviewIfNotExisted', async (restaurantId, { getState, rejectedValue }) => {
-    const restaurantMenu = selectReviewsByRestorantId(getState(), { restaurantId });
+    const restaurant = selectRestaurantById(getState(), { restaurantId });
     const reviewIds = selectReviewIds(getState());
 
-    if (restaurantMenu?.every((reviewId) => reviewIds.includes(reviewId))) {
+    if (restaurant?.every((reviewId) => reviewIds.includes(reviewId))) {
         return rejectedValue(LOADING_STATUS.earlyAdded);
     }
 

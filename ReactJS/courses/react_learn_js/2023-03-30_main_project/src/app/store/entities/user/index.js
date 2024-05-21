@@ -18,7 +18,7 @@ export const userSlice = createSlice({
             })
             .addCase(loadUserIfNotExisted.fulfilled, (state, { payload }) => {
                 state.loadingStatus = LOADING_STATUS.finished;
-                userEntityAdapter.setMany(state, payload);
+                userEntityAdapter.setAll(state, payload);
             })
             .addCase(loadUserIfNotExisted.rejected, (state, action) => {
                 state.loadingStatus = action.payload === LOADING_STATUS.earlyAdded ? LOADING_STATUS.finished : LOADING_STATUS.failed;
