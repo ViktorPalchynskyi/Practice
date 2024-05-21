@@ -12,6 +12,9 @@ export const Layout = ({ children }) => {
                 <Link className={styles.link} href="/contacts/about-us">
                     Info about us
                 </Link>
+                <Link className={styles.link} href="/contacts/adresses">
+                    Adresses
+                </Link>
             </footer>
         </div>
     );
