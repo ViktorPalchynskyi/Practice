@@ -1,14 +1,18 @@
-import { useMemo, useState } from "react";
-import { ThemeContext } from "@/app/context/ThemeContext/themeContext";
+import { useMemo, useState } from 'react';
+import { ThemeContext, ThemeSetterContext } from '@/app/context/ThemeContext/themeContext';
 
 export const ThemeContextProvider = ({ children }) => {
-  const [theme, setTheme] = useState('default');
+    const [theme, setTheme] = useState('default');
+    const [buttonTheme, setButtonTheme] = useState('dafault');
 
-  const contextValue = useMemo(() => ({ theme, setTheme }), [theme]);
+    const contextValue = useMemo(() => ({ theme, buttonTheme }), [theme, buttonTheme]);
+    const contextSetters = useMemo(() => ({ setButtonTheme, setTheme }), []);
 
-  return (
-    <ThemeContext.Provider value={contextValue}>
-        {children}
-    </ThemeContext.Provider>
-  );
+    return (
+        <ThemeContext.Provider value={contextValue}>
+            <ThemeSetterContext.Provider value={contextSetters}>
+              {children}
+            </ThemeSetterContext.Provider>
+        </ThemeContext.Provider>
+    );
 };
