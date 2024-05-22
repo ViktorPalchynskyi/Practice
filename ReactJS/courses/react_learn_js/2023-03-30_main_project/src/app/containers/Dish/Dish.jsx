@@ -2,7 +2,7 @@ import { Dish } from '@/app/components/Dish/Dish';
 import { selectDishById } from '@/app/store/entities/dish/selector';
 import { cardSlice } from '@/app/store/ui/card';
 import { selectDishAmount } from '@/app/store/ui/card/selectors';
-import React from 'react';
+import React, { memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 export const DishContainer = ({ dishId }) => {
@@ -14,3 +14,5 @@ export const DishContainer = ({ dishId }) => {
 
     return <Dish dish={dish} amount={amount} increment={increment} decrement={decrement} />;
 };
+
+export const DishContainerWithMemo = memo(DishContainer);

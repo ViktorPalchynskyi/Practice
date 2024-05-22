@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { CartContainer } from '../containers/Cart/Cart';
+import { CartWithAuthorization } from '../hoc/with-autorization';
 
 export default function CartPage() {
-    return <CartContainer />;
+    return <CartWithAuthorization />;
 }
