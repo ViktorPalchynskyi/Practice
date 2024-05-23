@@ -5,6 +5,7 @@ import { Accordion } from '../Accordion/Accordion';
 import { AccordionItem } from '../Accordion/AccordionItem';
 import { AccordionHeader } from '../Accordion/AccordionHeader';
 import { AccordionPanel } from '../Accordion/AccordionPanel';
+import { MouseTracker } from '../MouseTracker/MouseTracker';
 
 export const Home = () => {
     const [count, setCount] = useState(0);
@@ -25,6 +26,14 @@ export const Home = () => {
                     <AccordionPanel>Panel 6</AccordionPanel>
                 </AccordionItem>
             </Accordion>
+            <MouseTracker render={({ x, y }) => {
+                return (
+                    <>
+                        <h2>X is {x}</h2>
+                        <h2>Y is {y}</h2>
+                    </>
+                )
+            }}/>
         </>
     );
 };
