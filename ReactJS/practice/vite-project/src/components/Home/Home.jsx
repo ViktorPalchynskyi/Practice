@@ -17,7 +17,6 @@ export const Home = () => {
     return (
         <>
             <div>Home</div>
-            <Film />
             <Button onClick={() => setCount((count) => count + 1)} count={count} />
             <LabelWithContext />
             <Accordion>
@@ -32,16 +31,6 @@ export const Home = () => {
                 </AccordionItem>
             </Accordion>
             <button onClick={openModal}>Open modal</button>
-            <MouseTracker
-                render={({ x, y }) => {
-                    return (
-                        <>
-                            <h2>X is {x}</h2>
-                            <h2>Y is {y}</h2>
-                        </>
-                    );
-                }}
-            />
             <Modal isOpen={isOpen} onClose={closeModal}>
                 <p>This is a modal window</p>
             </Modal>

@@ -35,6 +35,14 @@ export const NewReviewForm = () => {
         dispatch({ type: FORM_ACTIONS.setName, payload: { name: event.target.value } });
     const onRatingChange = (event) =>
         dispatch({ type: FORM_ACTIONS.setName, payload: { name: event.target.value } });
+    const submitHandler = (event) => {
+        event.preventDefault();
+        const postData = {
+            name: state.name,
+            text: state.text,
+            rating: state.rating,
+        };
+    };
 
     useLayoutEffect(() => {
         if (ref.current) ref.current?.focus();
@@ -43,7 +51,7 @@ export const NewReviewForm = () => {
     }, []);
 
     return (
-        <div>
+        <form onSubmit={submitHandler}>
             <label htmlFor="">
                 Name:
                 <input type="text" value={state.name} onChange={onNameChange} ref={ref} />
@@ -56,6 +64,7 @@ export const NewReviewForm = () => {
                 Rating:
                 <input type="number" value={state.rating} onChange={onRatingChange} />
             </label>
-        </div>
+            <button>Submit</button>
+        </form>
     );
 };
