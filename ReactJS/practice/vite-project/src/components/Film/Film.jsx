@@ -1,8 +1,8 @@
 import React from 'react';
-import { FilmDetails } from './components/FilmDetails/FilmDetails';
-import { NewReviewForm } from './components/NewReviewForm/NewReviewForm';
+import { FilmDetails } from '../FilmDetails/FilmDetails';
+import { NewReviewForm } from '../NewReviewForm/NewReviewForm';
 
-export const Test = () => {
+export const Film = () => {
     // return React.createElement('div', {
     //     children: [
     //         React.createElement('span', { children: 'Hello' }),
