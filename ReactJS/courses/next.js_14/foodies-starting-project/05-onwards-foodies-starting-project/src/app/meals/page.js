@@ -1,8 +1,11 @@
 import { Meals } from '@components/Meals/Meals';
 import styles from './styles.module.css';
 import Link from 'next/link';
+import { getMeals } from '@/utils/meals';
 
-export default function MealsPage() {
+export default async function MealsPage() {
+    const meals = await getMeals();
+
     return (
         <>
             <header className={styles.header}>
@@ -13,7 +16,7 @@ export default function MealsPage() {
                 </p>
             </header>
             <main className={styles.main}>
-                <Meals meals={[]} />
+                <Meals meals={meals} />
             </main>
         </>
     );
