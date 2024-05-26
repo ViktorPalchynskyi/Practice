@@ -2,10 +2,16 @@ import { Meals } from '@components/Meals/Meals';
 import styles from './styles.module.css';
 import Link from 'next/link';
 import { getMeals } from '@/utils/meals';
+import { Suspense } from 'react';
+import MealsLoadingPage from './loading-out';
 
-export default async function MealsPage() {
+async function MealsContainer() {
     const meals = await getMeals();
 
+    return <Meals meals={meals} />;
+}
+
+export default function MealsPage() {
     return (
         <>
             <header className={styles.header}>
@@ -16,7 +22,9 @@ export default async function MealsPage() {
                 </p>
             </header>
             <main className={styles.main}>
-                <Meals meals={meals} />
+                <Suspense fallback={<MealsLoadingPage />}>
+                    <MealsContainer />
+                </Suspense>
             </main>
         </>
     );
