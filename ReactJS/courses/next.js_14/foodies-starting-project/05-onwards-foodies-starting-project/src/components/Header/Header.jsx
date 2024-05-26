@@ -3,8 +3,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import logoImage from '@/assets/logo.png';
 import styles from './styles.module.css';
-import { HeaderBackground } from '@components/Header/HeaderBackground/HeaderBackground';
-import { NavLink } from '@components/Header/NavLink/NavLink';
+import { HeaderBackground } from '@/src/components/HeaderBackground/HeaderBackground';
+import { NavLink } from '@/src/components/NavLink/NavLink';
 
 export const Header = () => {
     return (
