@@ -4,13 +4,23 @@ import { getMeal } from '@/utils/meals';
 import styles from './styles.module.css';
 import Image from 'next/image';
 
-export default function MealPage({ params }) {
+export async function generateMetadata({ params }) {
     const { slug } = params;
     const meal = getMeal(slug);
 
     if (!meal) {
         notFound();
     }
+  
+    return {
+        title: meal.title,
+        description: meal.summary,
+    };
+}
+
+export default function MealPage({ params }) {
+    const { slug } = params;
+    const meal = getMeal(slug);
 
     meal.instructions = meal.instructions.replace(/\n/g, '<br/>');
 
