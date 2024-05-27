@@ -2,6 +2,8 @@
 
 import { redirect } from 'next/navigation';
 import { saveMeal } from './meals';
+import { revalidatePath } from 'next/server';
+
 
 const isInvalidText = (text) => !text || text.trim() === '';
 const validateMeal = (meal) =>
@@ -13,7 +15,7 @@ const validateMeal = (meal) =>
         return value?.size === 0;
     });
 
-export const shareMeal = async (prevState, formData) => {
+export const shareMeal = async (formData) => {
     const meal = {
         title: formData.get('title'),
         summary: formData.get('summary'),
@@ -28,5 +30,6 @@ export const shareMeal = async (prevState, formData) => {
     }
 
     await saveMeal(meal);
+    revalidatePath('/meals');
     redirect('/meals');
 };

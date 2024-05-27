@@ -1,5 +1,3 @@
-'use client';
-
 import { ImagePicker } from '@components/ImagePicker/ImagePicker';
 import styles from './styles.module.css';
 import { shareMeal } from '@/utils/actions';
