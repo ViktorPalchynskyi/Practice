@@ -4,7 +4,7 @@ import { uploadImage } from '@/lib/cloudinary';
 import { storePost, updatePostLikeStatus } from '@/lib/posts';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
-
+ 
 export async function createPost(formData) {
     const title = formData.get('title');
     const image = formData.get('image');
@@ -42,6 +42,7 @@ export async function createPost(formData) {
         userId: 1,
     });
 
+    revalidatePath('/', 'layout');
     redirect('/feed');
 }
 
