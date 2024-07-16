@@ -2,7 +2,6 @@ import { promises as fs } from 'fs';
 import path from 'path';
 
 export default function HomePage({ products }) {
-    console.log('prod', products);
     return (
         <div>
             <h1>Hello there</h1>
@@ -16,11 +15,10 @@ export default function HomePage({ products }) {
 }
 
 export async function getStaticProps() {
+    console.log('Re...');
     const filePath = path.join(process.cwd(), 'data', 'dummy-backend.json');
     const jsonFile = await fs.readFile(filePath);
     const data = JSON.parse(jsonFile);
 
-    console.log(data);
-
-    return { props: { products: data.products } };
+    return { props: { products: data.products }, revalidate: 10 };
 }
