@@ -2,6 +2,10 @@ import { promises as fs } from 'fs';
 import path from 'path';
 
 export default function ProductDetailPage({ product }) {
+    // if (!product) {
+    //     return <p>Loading...</p>
+    // }
+
     return (
         <>
             <h1>{product.title}</h1>
@@ -10,13 +14,18 @@ export default function ProductDetailPage({ product }) {
     );
 }
 
-export async function getStaticProps(context) {
-    const { params } = context;
-
-    const productId = params.pid;
+async function getData(params) {
     const filePath = path.join(process.cwd(), 'data', 'dummy-backend.json');
     const jsonFile = await fs.readFile(filePath);
     const data = JSON.parse(jsonFile);
+
+    return data;
+}
+
+export async function getStaticProps(context) {
+    const { params } = context;
+    const productId = params.pid;
+    const data = await getData();
 
     const product = data.products.find((product) => product.id === productId);
     console.log(product);
@@ -29,18 +38,12 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
+    const data = await getData();
+    const ids = data.products.map((product) => product.id);
+    const params = ids.map((id) => ({ params: { pid: id } }));
+
     return {
-        paths: [
-            {
-                params: { pid: 'p1' },
-            },
-            {
-                params: { pid: 'p2' },
-            },
-            {
-                params: { pid: 'p3' },
-            },
-        ],
-        fallback: false,
+        paths: params,
+        fallback: 'blocking',
     };
 }
