@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
-import { redirect } from 'next/dist/server/api-utils';
 import path from 'path';
+import Link from 'next/link';
 
 export default function HomePage({ products }) {
     return (
@@ -8,7 +8,9 @@ export default function HomePage({ products }) {
             <h1>Hello there</h1>
             <ul>
                 {products.map((product) => (
-                    <li key={product.id}>{product.title}</li>
+                    <li key={product.id}>
+                        <Link href={`/${product.id}`}>{product.title}</Link>
+                    </li>
                 ))}
             </ul>
         </div>
@@ -24,9 +26,9 @@ export async function getStaticProps(context) {
     if (!data) {
         return {
             redirect: {
-                destination: '/no-data'
-            }
-        }
+                destination: '/no-data',
+            },
+        };
     }
 
     if (!data.products.length) {
@@ -36,6 +38,5 @@ export async function getStaticProps(context) {
     return {
         props: { products: data.products },
         revalidate: 10,
-        redirect: 
     };
 }
