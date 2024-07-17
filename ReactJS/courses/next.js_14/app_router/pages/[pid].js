@@ -2,9 +2,9 @@ import { promises as fs } from 'fs';
 import path from 'path';
 
 export default function ProductDetailPage({ product }) {
-    // if (!product) {
-    //     return <p>Loading...</p>
-    // }
+    if (!product) {
+        return <p>Loading...</p>;
+    }
 
     return (
         <>
@@ -30,6 +30,12 @@ export async function getStaticProps(context) {
     const product = data.products.find((product) => product.id === productId);
     console.log(product);
 
+    if (!product) {
+        return {
+            notFound: true,
+        };
+    }
+
     return {
         props: {
             product,
@@ -44,6 +50,6 @@ export async function getStaticPaths() {
 
     return {
         paths: params,
-        fallback: 'blocking',
+        fallback: true,
     };
 }
