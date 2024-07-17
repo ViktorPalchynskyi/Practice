@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 
-export default function LastSales() {
+export default function LastSales({ preSales }) {
     const [sales, setSales] = useState();
     const [loading, setLoading] = useState(false);
+
+    console.log('Prerender', preSales);
 
     useEffect(() => {
         setLoading(true);
@@ -30,3 +32,9 @@ export default function LastSales() {
         </ul>
     );
 }
+
+// export async function getStaticProps(params) {
+//     return fetch('/dummy-backend.json')
+//         .then((res) => res.json())
+//         .then((data) => ({ props: { preSales: data }, revalidate: 10 }));
+// }
