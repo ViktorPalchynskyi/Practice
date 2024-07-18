@@ -1,5 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
+import Head from 'next/head';
 
 export default function ProductDetailPage({ product }) {
     if (!product) {
@@ -8,6 +9,10 @@ export default function ProductDetailPage({ product }) {
 
     return (
         <>
+            <Head>
+                <title>{product.title}</title>
+                <meta name="description" content={product.description} />
+            </Head>
             <h1>{product.title}</h1>
             <p>{product.description}</p>
         </>
