@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import { promises as fs } from 'fs';
 import path from 'path';
 import Link from 'next/link';
@@ -5,6 +7,10 @@ import Link from 'next/link';
 export default function HomePage({ products }) {
     return (
         <div>
+            <Head>
+                <title>NextJS Events</title>
+                <meta name="description" content="Find a lot of great events that allow you to evolve..." />
+            </Head>
             <h1>Hello there</h1>
             <ul>
                 {products.map((product) => (
