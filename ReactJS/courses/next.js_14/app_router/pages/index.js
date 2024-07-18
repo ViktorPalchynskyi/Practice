@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { promises as fs } from 'fs';
 import path from 'path';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function HomePage({ products }) {
     return (
@@ -12,6 +13,7 @@ export default function HomePage({ products }) {
                 <meta name="description" content="Find a lot of great events that allow you to evolve..." />
             </Head>
             <h1>Hello there</h1>
+            <Image  src="/image/bratstvo.jpg" alt="image" width={250} height={160}/>
             <ul>
                 {products.map((product) => (
                     <li key={product.id}>
