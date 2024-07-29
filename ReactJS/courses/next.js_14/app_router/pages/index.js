@@ -13,7 +13,17 @@ export default function HomePage({ products }) {
                 <meta name="description" content="Find a lot of great events that allow you to evolve..." />
             </Head>
             <h1>Hello there</h1>
-            <Image  src="/image/bratstvo.jpg" alt="image" width={250} height={160}/>
+            <form>
+                <div>
+                    <label htmlFor="email">Email Address</label>
+                    <input type="email" id="email" />
+                </div><div>
+                    <label htmlFor="feedback">Feedback</label>
+                    <textarea id="feedback" rows="5"></textarea>
+                </div>
+                <button>Send Feedback</button>
+            </form>
+            <Image src="/image/bratstvo.jpg" alt="image" width={250} height={160} />
             <ul>
                 {products.map((product) => (
                     <li key={product.id}>
