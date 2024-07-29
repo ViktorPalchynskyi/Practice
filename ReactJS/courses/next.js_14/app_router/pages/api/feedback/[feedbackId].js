@@ -1,4 +1,4 @@
-import { extractFeedback } from './feedback';
+import { extractFeedback } from '.';
 
 export default function handler(req, res) {
     const feedbackId = req.query.feedbackId;

@@ -5,7 +5,7 @@ export default function FeedbackPage({ feedback }) {
     const [feedbackData, setFeedbackData] = useState(null);
 
     function loadFeedbackHandler(id) {
-        fetch(`/api/${id}`)
+        fetch(`/api/feedback/${id}`)
             .then((res) => res.json())
             .then(({ feedback }) => setFeedbackData(feedback));
     }
