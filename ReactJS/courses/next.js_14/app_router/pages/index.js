@@ -4,11 +4,12 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 export default function HomePage({ products }) {
     const emailInputRef = useRef();
     const feedbackInputRef = useRef();
+    const [feedback, setFeedback] = useState([]);
 
     function submitFormHandler(event) {
         event.preventDefault();
@@ -27,6 +28,14 @@ export default function HomePage({ products }) {
         })
             .then((res) => res.json)
             .then((data) => console.log(data));
+    }
+
+    function loadFeedbackHandler() {
+        fetch('/api/feedback')
+            .then((res) => res.json())
+            .then(({ feedback }) => {
+                setFeedback(feedback);
+            });
     }
 
     return (
@@ -54,6 +63,11 @@ export default function HomePage({ products }) {
                         <Link href={`/products/${product.id}`}>{product.title}</Link>
                     </li>
                 ))}
+            </ul>
+            <hr />
+            <button onClick={loadFeedbackHandler}>Load Feedback</button>
+            <ul>
+                {feedback.map(({ id, text, email }) => (<li key={id}>{`${email} - ${text}`}</li>))}
             </ul>
         </div>
     );
