@@ -69,6 +69,7 @@ export default function HomePage({ products }) {
             <ul>
                 {feedback.map(({ id, text, email }) => (<li key={id}>{`${email} - ${text}`}</li>))}
             </ul>
+            <Link href={'/feedback'}>All feedbacks</Link>
         </div>
     );
 }

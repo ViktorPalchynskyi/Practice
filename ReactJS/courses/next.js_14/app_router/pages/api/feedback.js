@@ -18,7 +18,6 @@ export default function handler(req, res) {
             text,
         };
 
-        
         const data = extractFeedback();
         data.push(newFeedback);
 
@@ -31,3 +30,5 @@ export default function handler(req, res) {
         res.status(200).json({ feedback: data });
     }
 }
+
+export { buildFeedbackPath, extractFeedback };
