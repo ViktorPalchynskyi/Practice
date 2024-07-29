@@ -4,8 +4,31 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRef } from 'react';
 
 export default function HomePage({ products }) {
+    const emailInputRef = useRef();
+    const feedbackInputRef = useRef();
+
+    function submitFormHandler(event) {
+        event.preventDefault();
+
+        console.log('event!!!', event);
+
+        const email = emailInputRef.current.value;
+        const text = feedbackInputRef.current.value;
+
+        fetch('/api/feedback', {
+            method: 'POST',
+            body: JSON.stringify({ email, text }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((res) => res.json)
+            .then((data) => console.log(data));
+    }
+
     return (
         <div>
             <Head>
@@ -13,13 +36,14 @@ export default function HomePage({ products }) {
                 <meta name="description" content="Find a lot of great events that allow you to evolve..." />
             </Head>
             <h1>Hello there</h1>
-            <form>
+            <form onSubmit={submitFormHandler}>
                 <div>
                     <label htmlFor="email">Email Address</label>
-                    <input type="email" id="email" />
-                </div><div>
+                    <input type="email" id="email" ref={emailInputRef} />
+                </div>
+                <div>
                     <label htmlFor="feedback">Feedback</label>
-                    <textarea id="feedback" rows="5"></textarea>
+                    <textarea id="feedback" rows="5" ref={feedbackInputRef}></textarea>
                 </div>
                 <button>Send Feedback</button>
             </form>
